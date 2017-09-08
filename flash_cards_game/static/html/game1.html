@@ -1,0 +1,36 @@
+ <!DOCTYPE html>
+<html>
+  <head>
+    <script src="js/easeljs-0.8.2.min.js"></script>
+    <script src="js/game1.js"></script>
+    <style>
+	html, body {
+  		width:  100%;
+  		height: 100%;
+  		margin: 0px;
+	}
+	#demoCanvas {
+		position: absolute; 
+		left: 0; 
+		top: 50;
+		cursor: none;
+    background-image: url(assets/fon.png); 
+    background-color: purple;
+    /*background-repeat: repeat-x;*/
+    background-size: contain;
+    /*background-image: url(assets/fon.png) repeat-x; 
+    background-color: purple;
+    
+    background-size: contain;*/
+	}
+	</style>
+  </head>
+  <body onload="init();">
+    <canvas id="demoCanvas"></canvas>
+    <img src = "assets/pricel.png" hidden></img>
+    <img src = "assets/panel.png" hidden></img>
+    <img src = "assets/ok.png" hidden></img>
+    <img src = "assets/quest.png" hidden></img>
+    <img src = "assets/clouds_footter.png" hidden></img>
+  </body>
+</html>
