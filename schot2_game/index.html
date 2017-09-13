@@ -1,0 +1,3390 @@
+
+<html style = "height: 100% ; width:100%; ">
+<head>
+    <meta charset="utf-8">
+    <title>Счет на скорость 2</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <link rel="stylesheet" href=" ../assets/styles/bootstrap3.css" media="screen">
+      <style>
+      .white_style{
+        background-color: white;
+        opacity: 0.95;
+        color: #1a1a1a;
+        box-shadow: none;
+        padding-bottom: 4;
+      }
+      .white_style8{
+        background-color: white;
+        opacity: 0.95;
+        color: #1a1a1a;
+      }
+      .black_style8{
+        background-color: black;
+        opacity: 0.8;
+        color: white;
+        box-shadow: 0 0 5px white
+      }
+      .black_style{
+        background-color: black;
+        opacity: 0.9;
+        color: white;
+        box-shadow: none;
+        padding-bottom: 4;
+    }
+    .black_style> li > a {
+      color: #dcdcdc;
+    }
+    .navbar-inverse .navbar-nav > li > a {
+      color: #dcdcdc;
+    }
+    </style>
+</head>
+<body style = "background-image: url( ../assets/images/backgrounds/fon_1.jpg); background-position: center center; background-repeat: no-repeat  ; background-size: cover; ">
+
+<div id = "modal_settings" class="modal">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        <btn type="btn" class="close" data-dismiss="modal" aria-hidden="true">&times;</btn>
+        <btn onclick = "restart(); "  class="close" tabindex = "-1" type="btn" style=" margin-right:20px"  >♻   </btn>
+
+        <h5 class="modal-title">
+
+        Настройки
+
+        </h5>
+      </div>
+        <div class="panel-body col-lg-7 col-md-7 col-sm-7">
+          <div class="panel-body">
+          <h5 style="text-align: center"> Модуль</h5>
+            <div class="btn-group btn-group-justified">
+              <a  id = "wt0btn_module_1" onclick = "change_module(1,true)"  style = " text-transform:  none"  class="btn btn-sm btn-default active" title="Простой счет">Просто</a>
+              <a  id = "wt0btn_module_2" onclick = "change_module(2,true)" class="btn btn-sm btn-default" title="Помощь брата" style = " text-transform:  none">Брат</a>
+              <a  id = "wt0btn_module_3" onclick = "change_module(3,true)" class="btn btn-sm btn-default" title="Помощь друга" style = " text-transform:  none">Друг</a>
+              <a  id = "wt0btn_module_4" onclick = "change_module(4,true)" class="btn btn-sm btn-default" title="Комбинированный счет" style = " text-transform:  none">Комбо</a>
+              <a  id = "wt0btn_module_5" onclick = "change_module(5,true)" class="btn btn-sm btn-default" title="Произвольный счет" style = " text-transform:  none">Произв</a>
+          </div>
+
+          <div class="btn-group btn-group-justified">
+            <a  id = "wt0btn_1"  class="btn btn-sm btn-default active hidden" onclick = "check_digit(1)" >1</a>
+            <a  id = "wt0btn_2"  class="btn btn-sm btn-default active hidden" onclick = "check_digit(2)">2</a>
+            <a  id = "wt0btn_3"  class="btn btn-sm btn-default active hidden" onclick = "check_digit(3)">3</a>
+            <a  id = "wt0btn_4"  class="btn btn-sm btn-default active hidden" onclick = "check_digit(4)">4</a>
+            <a  id = "wt0btn_5"  class="btn btn-sm btn-default active" onclick = "check_digit(5)">5</a>
+            <a  id = "wt0btn_6"  class="btn btn-sm btn-default active" onclick = "check_digit(6)">6</a>
+            <a  id = "wt0btn_7"  class="btn btn-sm btn-default active" onclick = "check_digit(7)">7</a>
+            <a  id = "wt0btn_8"  class="btn btn-sm btn-default active" onclick = "check_digit(8)">8</a>
+            <a  id = "wt0btn_9"  class="btn btn-sm btn-default active" onclick = "check_digit(9)">9</a>
+          </div>
+
+          <h5 style="text-align: center"> Операции</h5>
+          <div class="btn-group btn-group-justified">
+            <a  class="btn btn-sm btn-default" id = "wt0btn_operation_0" title="   Сложение" onclick = "change_operation(0);" >+</a>
+            <a  class="btn btn-sm btn-default" id = "wt0btn_operation_1" title="   Вычитание" onclick = "change_operation(1);">-</a>
+            <a  class="btn btn-sm btn-default active" id = "wt0btn_operation_2" title="   Сложение+Вычитание" onclick = "change_operation(2);">+/-</a>
+            <a  class="btn btn-sm btn-default active" id = "wt0btn_half" onclick = "change_half()">1/2</a>
+            <a  class="btn btn-sm btn-default active" id = "wt0btn_progress_mode"  onclick = "change_progress_mode();">P</a>
+        </div>
+        <!-- <h5 style="text-align: center"> Количество цифр</h5> -->
+         <div class="btn-group btn-group-justified">
+              <a  class="btn btn-sm btn-default " onclick = "change_digits_num(false);"  >◄</a>
+              <a  class="btn btn-sm btn-default active"   style = " text-transform:  none"  id = "wt0digits_num_tablo"onclick = "change_digits_num(0);" >цифр: 1</a>
+              <a  class="btn btn-sm btn-default" onclick = "change_digits_num(true);">►</a>
+        </div>
+        <!-- <h5 style="text-align: center"> Количество слагаемых </h5> -->
+        <div class="btn-group btn-group-justified">
+              <a  class="btn btn-sm btn-default " onclick = "change_summands_num(false);">◄</a>
+              <a  class="btn btn-sm btn-default active"  style = " text-transform:  none"  id = "wt0summands_num_tablo"  onclick = "change_summands_num(0);" >4 слагаемых</a>
+              <a  class="btn btn-sm btn-default" onclick = "change_summands_num(true);">►</a>
+        </div>
+        <!-- <h5 style="text-align: center"> Интервал </h5> -->
+        <div class="btn-group btn-group-justified">
+              <a  class="btn btn-default btn-sm" onclick = "change_interval(false);">◄</a>
+              <a  class="btn btn-default btn-sm active"  style = " text-transform:  none"  id="wt0interval_tablo" onclick = "change_interval(0);">1 сек</a>
+              <a  class="btn btn-default btn-sm" onclick = "change_interval(true);">►</a>
+          </div>
+
+
+      </div>
+      </div>
+      <div class="panel-body col-lg-5 col-md-5 col-sm-5 ">
+      <div class="panel-body">
+        <h5 style=" text-align:center">
+
+        Размер Шрифта
+
+        </h5>
+          <div class="btn-group btn-group-justified">
+              <a  class="btn btn-default btn-sm" onclick = "change_fontsize_f(false);">◄</a>
+              <a  class="btn btn-default btn-sm active" id="wt0fontsize_tablo" onclick = "change_fontsize_f(0);">35</a>
+              <a  class="btn btn-default btn-sm" onclick = "change_fontsize_f(true);">►</a>
+          </div>
+          <h5 style=" text-align:center">Количестов экранов</h5>
+          <div class="btn-group btn-group-justified">
+              <a  class="btn btn-default btn-sm" onclick = "change_screens_num(false)">◄</a>
+              <a  class="btn btn-default btn-sm active" style = " text-transform:  none"   id="screen_num_tablo" onclick = "change_screens_num(0)">1 экран</a>
+              <a  class="btn btn-default btn-sm" onclick = "change_screens_num(true)">►</a>
+          </div>
+
+         <h5 style=" text-align:center; ">
+
+         Шрифт
+
+         </h5>
+            <div class="form-group">
+
+                  <select class="form-control" id="select" onchange = "change_font()">
+                    <option  >Arial</option>
+                    <option  >Arial Black</option>
+                    <option>Jokerman</option>
+                    <option>DFPOP1-W9</option>
+                    <option>Playbill</option>
+                    <option selected>Showcard Gothic</option>
+                  </select>
+             </div>
+      </div>
+ </div>
+      <div class="modal-footer">
+        <div class="panel-body">
+          <div class="panel-body">
+        <btn type="btn" class="btn btn-success" data-dismiss="modal">
+
+        Применить
+
+        </btn>
+        </div>
+         </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+  <nav class="navbar navbar-inverse navbar-fixed-top white_style"  style = "z-index: 2; margin-bottom:0; padding: 0;" >
+    <div class="container-fluid ">
+      <div class="navbar-header">
+        <btn   type="btn" class="navbar-toggle collapsed " data-toggle="collapse" onclick= "open_global_settings(); ">
+          &#9776
+        </btn>
+        <btn onclick = " show_example(); "  class="navbar-toggle collapsed " data-toggle="collapse"  tabindex = "-1" ><b>EX</b> </btn>
+        <btn id ="btn_voice" onclick = " if (voice==false){voice=true; this.html('♫'; } else{voice=false; this.html('♪');} " class="navbar-toggle collapsed " data-toggle="collapse"  tabindex = "-1" ><b>♫</b> </btn>
+        <btn onclick = "change_style(); "  class="navbar-toggle collapsed " data-toggle="collapse"  tabindex = "-1" > <b>S</b>  </btn>
+        <btn onclick = "change_background(); "  class="navbar-toggle collapsed " data-toggle="collapse" tabindex = "-1" >☻   </btn>
+
+        <a id = "navbar_logo" tabindex = "-1" class="navbar-brand" href="/games" style = "width: 100px; background:url( ../assets/images/logo_rus.png); background-position: center center; background-repeat: no-repeat; background-size: contain  "></a>
+      </div>
+
+      <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
+        <ul class="nav navbar-nav" id="navbar_parametrs">
+        <table style="margin: 0">
+            <div class="btn-group" style="border-left:1px solid #dcdcdc; float: left;">
+              <a class="btn btn-default  white_style" onclick = "change_module(false,true)">◄</a>
+              <a class="btn btn-default  white_style" style="width: 153" id = "navbar_module_tablo" onclick = "change_module(0,true)">Просто</a>
+              <a class="btn btn-default  white_style" onclick = "change_module(true,true)">►</a>
+            </div>
+            <div class="btn-group" style="border-left:1px solid #dcdcdc; float: left;">
+              <a class="btn btn-default  white_style" onclick = "change_operation('l')">◄</a>
+              <a class="btn btn-default  white_style" style="width: 100" id = "navbar_operation_tablo">Слож\выч</a>
+              <a class="btn btn-default  white_style" onclick = "change_operation('r')">►</a>
+            </div>
+            <div class="btn-group" style="border-left:1px solid #dcdcdc; float: left;">
+              <a class="btn btn-default  white_style" onclick = "change_digits_num(false);">◄</a>
+              <a class="btn btn-default  white_style" style="width: 80" onclick = "change_digits_num(0);" >цифр: <span id="navbar_digits_num_tablo"> 1 </span></a>
+              <a class="btn btn-default  white_style" onclick = "change_digits_num(true);">►</a>
+            </div>
+            <div class="btn-group" style="border-left:1px solid #dcdcdc; float: left;">
+              <a class="btn btn-default  white_style" onclick = "change_summands_num(false);">◄</a>
+              <a class="btn btn-default  white_style" style="width: 80" onclick = "change_summands_num(0);">слаг: <span id="navbar_summands_num_tablo"> 4 </span></a>
+              <a class="btn btn-default  white_style" onclick = "change_summands_num(true);">►</a>
+            </div>
+            <div class="btn-group" style="border-left:1px solid #dcdcdc; float: left;">
+              <a class="btn btn-default  white_style" onclick = "change_font(false);">◄</a>
+              <a class="btn btn-default  white_style" style="width: 80"  onclick = "change_font(0); ">Шрифт:<span id="navbar_font_tablo"> A </span> </a>
+              <a class="btn btn-default  white_style" onclick = "change_font(true);">►</a>
+            </div>
+
+          </table>
+
+          <table style="margin: 0">
+            <div class="btn-group btn-group-justified" style="border-left:1px solid #dcdcdc; float: left; width: 212">
+              <a class="btn btn-default hidden white_style" id = "wt-1btn_1" onclick = "check_digit(1)">1</a>
+              <a class="btn btn-default hidden white_style" id = "wt-1btn_2" onclick = "check_digit(2)">2</a>
+              <a class="btn btn-default hidden white_style" id = "wt-1btn_3" onclick = "check_digit(3)">3</a>
+              <a class="btn btn-default hidden white_style" id = "wt-1btn_4" onclick = "check_digit(4)">4</a>
+              <a class="btn btn-default active white_style" id = "wt-1btn_5" onclick = "check_digit(5)">5</a>
+              <a class="btn btn-default active white_style" id = "wt-1btn_6" onclick = "check_digit(6)">6</a>
+              <a class="btn btn-default active white_style" id = "wt-1btn_7" onclick = "check_digit(7)">7</a>
+              <a class="btn btn-default active white_style" id = "wt-1btn_8" onclick = "check_digit(8)">8</a>
+              <a class="btn btn-default active white_style" id = "wt-1btn_9" onclick = "check_digit(9)">9</a>
+
+            </div>
+            <div class="btn-group" style="border-left:1px solid #dcdcdc; float: left; ">
+              <a class="btn btn-default  white_style" style="width: 122" id = "navbar_progress_mode" onclick = "change_progress_mode();">прогресс</a>
+              <!-- <a class="btn btn-default  white_style" style="width: 50">Turbo</a> -->
+              <a class="btn btn-default  white_style active" style="width: 36" id = "nabvar_btn_half" onclick = "change_half()">1/2</a>
+            </div>
+            <div class="btn-group" style="border-left:1px solid #dcdcdc; float: left;">
+              <a class="btn btn-default  white_style" onclick = "change_interval(false);">◄</a>
+              <a class="btn btn-default  white_style" style="width: 81" onclick = "change_interval(0);">сек: <span id="navbar_interval_tablo"> 1 </span> </a>
+              <a class="btn btn-default  white_style" onclick = "change_interval(true);">►</a>
+            </div>
+            <div class="btn-group" style="border-left:1px solid #dcdcdc; float: left;">
+              <a class="btn btn-default  white_style" onclick = "change_screens_num(false);">◄</a>
+              <a class="btn btn-default  white_style" style="width: 80" onclick = "change_screens_num(0);">кран: <span id="navbar_screens_num_tablo"> 1 </span></a>
+              <a class="btn btn-default  white_style" onclick = "change_screens_num(true);">►</a>
+            </div>
+            <div class="btn-group" style="border-left:1px solid #dcdcdc; float: left;">
+              <a class="btn btn-default  white_style" onclick = "change_fontsize_f(false);">◄</a>
+              <a class="btn btn-default  white_style" style="width: 79"  onclick = "change_fontsize_f(0); ">Шрифт:<span id="navbar_fontsize_tablo"> 50 </span> </a>
+              <a class="btn btn-default  white_style" onclick = "change_fontsize_f(true);">►</a>
+            </div>
+          </table>
+
+        </ul>
+        <ul class="nav navbar-nav navbar-right">
+        <a href="#" class="navbar-brand" onclick = "Global_stop();">■</a>
+        <a href="#" class="navbar-brand hidden"  id="btn_global_repeat" onclick = "Global_repeat();">&#8634;</a>
+        <a href="#" class="navbar-brand" id="btn_global_start" onclick = "Global_start();">►</a>
+          <table >
+            <div class="btn-group btn-group-justified" style="float: left; width: 100;">
+              <a onclick = " show_example(); "  class="btn  btn-default  white_style" tabindex = "-1" ><b>EX</b> </a>
+              <a onclick = "change_background(); "  class="btn btn-default  white_style" tabindex = "-1" >☻</a>
+              <a  tabindex = "-1" class="btn  btn-default white_style"  onclick = "open_global_settings(); ">&#9776</a>
+            </div>
+          </table>
+          <table >
+            <div class="btn-group btn-group-justified" style="float: left;  width: 100">
+              <a  tabindex = "-1" class="btn btn-default white_style" onclick = "show_settings(); ">N</a>
+              <a  onclick = " if (voice==false){voice=true; this.html('♫'); $('#btn_voice').html('♫')} else{voice=false; this.html('♪'); $('#btn_voice').html('♪')}; "  class="btn  btn-default  white_style" tabindex = "-1" ><b>♫</b> </a>
+              <a onclick = "change_style(); "  class="btn btn-default white_style"  tabindex = "-1" >S</a>
+
+            </div>
+          </table>
+          </ul>
+      </div>
+    </div>
+  </nav>
+
+
+
+<div  id = "window_task" class="row white_style8 " style="margin:auto; height:100vh; border-right: 1px dotted #999999; border-bottom: 1px dotted #999999" >
+  <div style="margin-top:10vh"  class="">
+    <div id = "window_task_0" style="margin:0; padding:0; height:90vh" class="hidden">
+        <input   onclick =  "if (device.mobile() || device.tablet() || $('#btn_start').html() == '■' || $('#btn_start').html() == '►' ) start(0); "  class="form-control" id="wt0taskbox" type="text" value="►" style="
+              border-width:0; cursor: pointer; color:white;
+              text-align: center; font-size: 80vh; height: 90vh" readonly autofocus>
+        <textarea onclick =  "start(0); " class="form-control hidden" id="wt0answerbox" type="number" value="" style="
+              border-width:0; cursor: pointer;  color:white;
+              text-align:  center; resize:none; overflow: hidden; padding-bottom:20% " readonly autofocus> </textarea>
+    </div>
+  </div>
+</div>
+
+
+<script>
+var white_style = true
+correct_ans_num=0
+screen_num = 1
+mode = "synchro"
+var Screen=[]
+var screen_set={
+  name: 'Экран ',
+  points: 0,
+  module: 1,
+  checked_digits:[1,2,3,4,5,6,7,8,9].slice(),
+  operation: 2,
+  digits_num: 1,
+  half: true,
+  summands_num: 4,
+  interval: 1000,
+  all_checked: true,
+  example: "",
+  example_numbers: [],
+  progress_mode: false,
+  progress_key: 0,
+  progress_select_key: true,
+  fontsize: "40vh",
+  timer: "",
+  status: "countdown_stopped",
+  num_summand: 0,
+  correct_answer: 0,
+  box_type: "settingbox"
+}
+Global_status={
+  countdown_stopped: [1],
+  countdown_in_proccess: [],
+  count_start: [],
+  count_paused: [],
+  count_in_proccess: [],
+  get_answer: [],
+  status: "countdown_stopped"
+}
+function countdown_f(repeat,num_screen) {
+  if (num_screen==1 && mode =="synchro" && Screen[num_screen].num_summand >0) soundClick(1)
+  if (Screen[num_screen].num_summand==0){
+    $("#wt" + num_screen + "taskbox").val("");
+  }
+  else if(Screen[num_screen].num_summand == -1){
+    clearInterval(Screen[num_screen].timer)
+    Screen[num_screen].status = 'count_start';
+    change_status_arrays(num_screen,"count_start")
+    start(repeat,num_screen)
+  }
+  else{
+    $("#wt" + num_screen + "taskbox").val(Screen[num_screen].num_summand)
+  }
+    Screen[num_screen].num_summand--;
+}
+
+function Global_start() {
+  synchro = true
+  for (var i=2; i<=screen_num; i++){
+    if (Screen[i].interval!=Screen[1].interval){
+      synchro=false
+    }
+  }
+  if (synchro==true)
+    mode="synchro"
+  else
+    mode="asynchro"
+  // if (Global_status.status=="")
+  for (var i=1; i<=screen_num; i++){
+      start(false,i)
+  }
+}
+
+function change_status_arrays(num_screen,status) {
+  exclude(num_screen,Global_status.countdown_stopped)
+  exclude(num_screen,Global_status.countdown_in_proccess)
+  exclude(num_screen,Global_status.count_start)
+  exclude(num_screen,Global_status.count_in_proccess)
+  exclude(num_screen,Global_status.count_paused)
+  exclude(num_screen,Global_status.get_answer)
+  $("#btn_global_repeat").addClass("hidden")
+  switch (status){
+    case "countdown_stopped":
+      include(num_screen,Global_status.countdown_stopped)
+      if (Global_status.countdown_stopped.length==screen_num){
+        $("#btn_global_start").html("►")
+        Global_status.status = "countdown_stopped"
+      }
+
+    break;
+    case "countdown_in_proccess":
+      include(num_screen,Global_status.countdown_in_proccess)
+      if (Global_status.countdown_in_proccess.length==screen_num){
+        $("#btn_global_start").html("■")
+        Global_status.status = "countdown_in_proccess"
+      }
+
+    break;
+    case "count_start":
+      include(num_screen,Global_status.count_start)
+      if (Global_status.count_start.length==screen_num){
+        $("#btn_global_start").html("||")
+        Global_status.status = "count_start"
+      }
+    break;
+    case "count_in_proccess":
+      include(num_screen,Global_status.count_in_proccess)
+      if (Global_status.count_in_proccess.length==screen_num){
+        $("#btn_global_start").html("||")
+        Global_status.status = "count_in_proccess"
+        $("#btn_global_repeat").removeClass("hidden")
+      }
+    break;
+    case "count_paused":
+      include(num_screen,Global_status.count_paused)
+      if (Global_status.count_paused.length==screen_num){
+        $("#btn_global_start").html("►")
+        Global_status.status = "count_paused"
+        $("#btn_global_repeat").removeClass("hidden")
+      }
+    break;
+    case "get_answer":
+      include(num_screen,Global_status.get_answer)
+      if (Global_status.get_answer.length==screen_num){
+        $("#btn_global_start").html("✐")
+        Global_status.status = "get_answer"
+        $("#btn_global_repeat").removeClass("hidden")
+      }
+    break;
+  }
+
+}
+
+function Global_stop() {
+  change_windows("taskbox",screen_num)
+  for (var i=1; i<=screen_num; i++){
+    clearInterval(Screen[i].timer)
+    Screen[i].status = "countdown_stopped"
+    change_status_arrays(i,"countdown_stopped")
+    com="#wt" + i + "taskbox"
+    $(com).val("")
+
+  }
+}
+
+function Global_repeat() {
+  Global_stop()
+  setTimeout(function () {
+    for (var i=1; i<=screen_num; i++){
+      start_repeat(i)
+    }
+  }, 500)
+
+}
+
+function start_repeat(num_screen) {
+  Screen[num_screen].status = "countdown_stopped"
+  start(true, num_screen)
+  change_status_arrays(num_screen,"countdown_stopped")
+}
+
+function start(repeat, num_screen) {
+  This_screen = Screen[num_screen]
+  switch (This_screen.status){
+    case "countdown_stopped":
+      change_window("taskbox",num_screen)
+      $("#wt"+num_screen+"answerbox_btn").addClass("invisible")
+      $("#wt" + num_screen + "taskbox").val(3)
+      soundClick(1)
+      This_screen.num_summand = 2
+      This_screen.status = 'countdown_in_proccess'
+      change_status_arrays(num_screen,"countdown_in_proccess")
+      This_screen.timer = setInterval(function(){ countdown_f(repeat,num_screen)}, 700);
+    break;
+    case "countdown_in_proccess":
+      $("#wt" + num_screen + "taskbox").val("")
+      This_screen.status = "countdown_stopped"
+      change_status_arrays(num_screen,"countdown_stopped")
+      clearInterval(This_screen.timer)
+    break;
+    case "count_start":
+      if (mode=="asynchro" && screen_num>1){
+        synchro = true
+        for (var i=2; i<= screen_num; i++){
+          if (Screen[1].interval != Screen[i].interval)
+            synchro = false
+        }
+        if (synchro==true)
+          mode="synchro"
+      }
+
+      This_screen.example=""
+      change_window("taskbox", num_screen)
+      if (repeat==false){
+        stop_cycle = false
+        generate(This_screen.module, This_screen.operation, This_screen.digits_num, This_screen.summands_num, This_screen.half, This_screen.checked_digits, num_screen)
+      }
+      else{
+        This_screen.num_summand++
+      }
+      if (voice==true && screen_num == 1 && This_screen.digits_num<=2 && This_screen.interval>=700){
+        sound_number_f(This_screen.example_numbers[0])
+      }
+      else if(mode=="synchro" && num_screen==1) soundClick(2)
+      taskbox_id = "#wt" + num_screen + "taskbox"
+      $(taskbox_id).val(This_screen.example_numbers[0])
+      This_screen.num_summand++
+      This_screen.status = "count_in_proccess"
+      change_status_arrays(num_screen,"count_in_proccess")
+      if (screen_num == 1){
+        interval = This_screen.interval
+        if (interval > 1000)
+          interval_empty = interval - 100
+        else
+          interval_empty= parseInt(0.85*interval)
+        if (interval > 100)
+          setTimeout(function(){ $(taskbox_id).val("") }, interval_empty);
+      }
+      This_screen.timer = setInterval(function(){ show_screen(num_screen)}, This_screen.interval);
+    break;
+    case "count_in_proccess":
+      clearInterval(This_screen.timer)
+      This_screen.status = "count_paused"
+
+      change_status_arrays(num_screen,"count_paused")
+      $("#wt" + num_screen + "answerbox_btn").removeClass("invisible")
+      // $("#wt" + num_screen + "taskbox").val("||")
+    break;
+    case "count_paused":
+      $("#wt" + num_screen + "answerbox_btn").addClass("invisible")
+      This_screen.timer = setInterval(function(){ show_screen(num_screen)}, This_screen.interval);
+      This_screen.status = "count_in_proccess"
+      change_status_arrays(num_screen,"count_in_proccess")
+    break;
+    case "get_answer":
+      if (repeat!= 3){
+        student_answer = parseInt($("#wt" + num_screen + "taskbox").val())
+        change_window("answerbox", num_screen)
+        answerbox_id = "#wt" + num_screen + "answerbox"
+        if (student_answer == This_screen.correct_answer){
+          if (This_screen.progress_mode==true){
+            This_screen.progress_key+=1
+            if (This_screen.progress_key==1){
+              This_screen.progress_key=0
+              switch(This_screen.progress_select_key){
+                case true:
+                  This_screen.progress_select_key = false
+                  change_interval(false,num_screen)
+                break;
+                case false:
+                  This_screen.progress_select_key = true
+                  change_summands_num(true,num_screen)
+                break;
+              }
+            }
+          }
+          correct_ans_num+=1
+          answerbox_text = student_answer +  " = " +  This_screen.correct_answer + "\n"+ correct[randomInteger(59)]
+          This_screen.example+= " = " + student_answer + " ✔ (" + This_screen.correct_answer + ")"
+          This_screen.points+=10
+          $("#wt" + num_screen + "points").html(This_screen.points)
+          if (white_style==true)
+            $(answerbox_id).css("background-color", "#b3ffb3")
+          else
+            $(answerbox_id).css("background-color", "#001a00")
+
+        }
+        else{
+          if (This_screen.progress_mode==true){
+            This_screen.progress_key-=1
+            if (This_screen.progress_key==-1){
+              This_screen.progress_key=0
+              switch(This_screen.progress_select_key){
+                case true:
+                  This_screen.progress_select_key = false
+                  change_interval(true,num_screen)
+                break;
+                case false:
+                  This_screen.progress_select_key = true
+                  change_summands_num(false,num_screen)
+                break;
+              }
+            }
+          }
+          answerbox_text = student_answer +  " ≠ " +  This_screen.correct_answer + "\n"+ " Упс, Ошибочка  "
+          This_screen.example+= " ≠ " + student_answer + " ✘ (" + This_screen.correct_answer + ")"
+          if (white_style==true)
+            $(answerbox_id).css("background-color", "#ffcccc")
+          else
+            $(answerbox_id).css("background-color", "#660000")
+        }
+        if (num_screen==screen_num){
+          if (correct_ans_num>parseInt(0.5*screen_num)){
+            soundClick2(1,1);
+          }
+          else{
+            soundClick2(0,1);
+          }
+          correct_ans_num=0
+        }
+
+
+        $(answerbox_id).val(answerbox_text)
+        This_screen.status = "countdown_stopped"
+        change_status_arrays(num_screen,"countdown_stopped")
+      }
+
+    break;
+  }
+}
+
+function show_screen(num_screen) {
+  This_screen = Screen[num_screen]
+  This_screen.num_summand++
+  taskbox_id =  "#wt" + num_screen + "taskbox"
+  if (This_screen.num_summand == This_screen.example_numbers.length){
+    clearInterval(This_screen.timer)
+    This_screen.status = "get_answer"
+    change_status_arrays(num_screen,"get_answer")
+    $(taskbox_id).val("")
+    $(taskbox_id).prop("readonly",false)
+    $("#wt" + num_screen + "answerbox_btn").removeClass("invisible")
+    if (num_screen==1) $(taskbox_id).focus()
+  }
+  else{
+    color_num++
+    if (color_num % 6 == 0) color_num = 0
+    if (white_style == true)
+      $(taskbox_id).css("color",colors[(color_num)%6])
+    else
+      $(taskbox_id).css("color",colors2[(color_num)%6])
+    $(taskbox_id).prop("readonly",true)
+    number = This_screen.example_numbers[This_screen.num_summand]
+    $(taskbox_id).val(number)
+
+    if (voice==true && screen_num == 1 && This_screen.digits_num <= 2 && This_screen.interval >= 700){
+      sound_number_f(This_screen.example_numbers[This_screen.num_summand])
+    }
+    else if(mode=="synchro" && num_screen==1) soundClick(2)
+    if (screen_num == 1){
+      interval = This_screen.interval
+      if (interval > 1000)
+        interval_empty = interval - 100
+      else
+        interval_empty= parseInt(0.85*interval)
+      if (interval > 100)
+        setTimeout(function(){ $(taskbox_id).val("") }, interval_empty);
+    }
+
+  }
+}
+
+function generate(module, operation, digits_num, summands_num, half, checked_digits, num_screen){
+      stop_cycle = false
+      schotchik = 0
+      chislo = 0;
+      cifr = [];
+      chislo_plus = [];
+      Screen[num_screen].num_summand = 0
+      primer = []
+      possible_digits = possible_checked(module, operation, checked_digits);
+      for (i = 0; i < digits_num ; i++) {
+        var t =  possible_checked(module, operation, checked_digits);
+        possible_checked_var[i] = t.slice();
+      }
+      Module_Operation = module*10 + operation;
+  switch (parseInt(Module_Operation)) {
+        case 10: {
+          znak = 0;
+          chislo = 0;
+          for (var i = 0; i < digits_num-1; i++){
+            cifr[i] = randomInteger(4);
+            chislo += cifr[i]*power10(i);
+          }
+          var i = digits_num - 1;
+          cifr[i] = 1 + randomInteger(3);
+          chislo += cifr[i]*power10(i);
+          primer.push(chislo)
+          while (stop_cycle == false){
+            calculate_simple_add(summands_num, digits_num, half, possible_digits)
+          }
+        }
+        break;
+
+        case 11: {
+          chislo = 0;
+          var t = checked_digits.slice();
+          exclude(0,t);
+          for (var i = 0; i < digits_num; i++){
+            cifr[i] = t[randomInteger(t.length)]
+            chislo += cifr[i]*power10(i);
+          }
+          primer.push(chislo)
+          while (stop_cycle == false){
+            calculate_simple_sub(summands_num, digits_num, half, possible_digits)
+          }
+
+        }
+        break;
+
+        case 12: {
+          chislo = 0;
+          var t = checked_digits.slice();
+          for (var i = 0; i < digits_num-1; i++){
+            cifr[i] = t[randomInteger(t.length)]
+            chislo += cifr[i]*power10(i);
+          }
+          exclude(0,t);
+          i = digits_num - 1;
+          cifr[i] = t[randomInteger(t.length)]
+          chislo += cifr[i]*power10(i);
+
+          primer.push(chislo)
+          while (stop_cycle == false){
+            calculate_simple_add_sub(summands_num, digits_num, half, possible_digits)
+          }
+
+        }
+        break;
+
+        case 20: {
+          znak = 0;
+          chislo = 0;
+          for (var i = 0; i < digits_num-1; i++){
+            cifr[i] = randomInteger(5);
+            chislo += cifr[i]*power10(i);
+          }
+          i = digits_num - 1;
+          cifr[i] = 2 + randomInteger(3);
+          chislo += cifr[i]*power10(i);
+          ;
+          primer.push(chislo)
+          while (stop_cycle == false){
+            calculate_brother_add(summands_num, digits_num, half, possible_digits)
+          }
+
+        }
+        break;
+
+        case 21: {
+          chislo = 0;
+          for (var i = 0; i < digits_num; i++){
+            cifr[i] = 5+randomInteger(5);
+            chislo += cifr[i]*power10(i);
+          }
+          ;
+          primer.push(chislo)
+          while (stop_cycle == false){
+            calculate_brother_sub(summands_num, digits_num, half, possible_digits)
+          }
+        }
+        break;
+
+        case 22: {
+          chislo = 0;
+          for (var i = 0; i < digits_num-1; i++){
+            cifr[i] = randomInteger(10);
+            chislo += cifr[i]*power10(i);
+          }
+          i = digits_num - 1;
+          cifr[i] = 2 + randomInteger(8);
+          chislo += cifr[i]*power10(i);
+          ;
+          primer.push(chislo)
+          while (stop_cycle == false){
+            calculate_brother_add_sub(summands_num, digits_num, half, possible_digits)
+          }
+
+        }
+        break;
+
+        case 30: {
+          znak = 0;
+          chislo = 0;
+          for (var i = 0; i < digits_num-1; i++){
+            cifr[i] = randomInteger(10);
+            chislo += cifr[i]*power10(i);
+          }
+          i = digits_num - 1;
+          cifr[i] = 2 + randomInteger(8);
+          chislo += cifr[i]*power10(i);
+          ;
+          primer.push(chislo)
+          while (stop_cycle == false){
+            calculate_friend_add(summands_num, digits_num, half, possible_digits)
+          }
+
+        }
+        break;
+
+        case 31: {
+          znak = 1;
+          chislo = 0;
+          for (var i = 0; i < digits_num; i++){
+            cifr[i] = randomInteger(10);
+            chislo += cifr[i]*power10(i);
+          }
+          i = digits_num;
+          cifr[i] = 2 + randomInteger(8);
+          chislo += cifr[i]*power10(i);
+          ;
+          primer.push(chislo)
+          while (stop_cycle == false){
+            calculate_friend_sub(summands_num, digits_num, half, possible_digits)
+          }
+
+        }
+        break;
+
+        case 32: {
+          znak = 0;
+          chislo = 0;
+          for (var i = 0; i < digits_num-1; i++){
+            cifr[i] = randomInteger(10);
+            chislo += cifr[i]*power10(i);
+          }
+          i = digits_num - 1;
+          cifr[i] = 2 + randomInteger(8);
+          chislo += cifr[i]*power10(i);
+          ;
+          primer.push(chislo)
+          while (stop_cycle == false){
+            calculate_friend_add_sub(summands_num, digits_num, half, possible_digits)
+          }
+
+        }
+        break;
+
+        case 40: {
+          znak = 0;
+          chislo = 0;
+          for (var i = 0; i < digits_num-1; i++){
+            cifr[i] = randomInteger(10);
+            chislo += cifr[i]*power10(i);
+          }
+          i = digits_num - 1;
+          cifr[i] = 2 + randomInteger(8);
+          chislo += cifr[i]*power10(i);
+          ;
+          primer.push(chislo)
+          while (stop_cycle == false){
+            calculate_combo_add(summands_num, digits_num, half, possible_digits)
+          }
+
+        }
+        break;
+
+        case 41: {
+          znak = 1;
+          chislo = 0;
+          for (var i = 0; i < digits_num; i++){
+            cifr[i] = randomInteger(10);
+            chislo += cifr[i]*power10(i);
+          }
+          i = digits_num;
+          cifr[i] = 2 + randomInteger(8);
+          chislo += cifr[i]*power10(i);
+          ;
+          primer.push(chislo)
+          while (stop_cycle == false){
+            calculate_combo_sub(summands_num, digits_num, half, possible_digits)
+          }
+
+        }
+        break;
+
+        case 42: {
+          znak = 0;
+          chislo = 0;
+          for (var i = 0; i < digits_num-1; i++){
+            cifr[i] = randomInteger(10);
+            chislo += cifr[i]*power10(i);
+          }
+          i = digits_num - 1;
+          cifr[i] = 2 + randomInteger(8);
+          chislo += cifr[i]*power10(i);
+          ;
+          primer.push(chislo)
+          while (stop_cycle == false){
+            calculate_combo_add_sub(summands_num, digits_num, half, possible_digits)
+          }
+
+        }
+        break;
+        case 50: {
+          znak = 0;
+          chislo = 0;
+          for (var i = 0; i < digits_num-1; i++){
+            cifr[i] = randomInteger(10);
+            chislo += cifr[i]*power10(i);
+          }
+          i = digits_num - 1;
+          cifr[i] = 2 + randomInteger(8);
+          chislo += cifr[i]*power10(i);
+          ;
+          primer.push(chislo)
+          while (stop_cycle == false){
+            calculate_random_add(summands_num, digits_num, half, possible_digits)
+          }
+
+        }
+        break;
+
+        case 51: {
+          znak = 1;
+          chislo = 0;
+          for (var i = 0; i < digits_num; i++){
+            cifr[i] = randomInteger(10);
+            chislo += cifr[i]*power10(i);
+          }
+          i = digits_num;
+          cifr[i] = 2 + randomInteger(8);
+          chislo += cifr[i]*power10(i);
+          ;
+          primer.push(chislo)
+          while (stop_cycle == false){
+            calculate_random_sub(summands_num, digits_num, half, possible_digits)
+          }
+
+        }
+        break;
+
+        case 52: {
+          znak = 0;
+          chislo = 0;
+          for (var i = 0; i < digits_num-1; i++){
+            cifr[i] = randomInteger(10);
+            chislo += cifr[i]*power10(i);
+          }
+          i = digits_num - 1;
+          cifr[i] = 2 + randomInteger(8);
+          chislo += cifr[i]*power10(i);
+          ;
+          primer.push(chislo)
+          while (stop_cycle == false){
+            calculate_random_add_sub(summands_num, digits_num, half, possible_digits)
+          }
+
+        }
+        break;
+      }
+      correct_answer = 0
+      task=""
+      example = ""
+      for (var j=0; j<primer.length; j++){
+        correct_answer+=parseInt(primer[j])
+        if (j==0){
+          example+=primer[j]
+        }
+        else{
+          if (parseInt(primer[j]) > 0){
+            example += " + " + primer[j]
+          }
+          else{
+             example +=  " - " + -primer[j]
+          }
+        }
+      }
+      Screen[num_screen].example = example
+      Screen[num_screen].example_numbers = primer
+      Screen[num_screen].correct_answer = correct_answer
+}
+
+var primer=[]
+settings_showed = false
+function show_settings(){
+  if (settings_showed == true){
+    settings_showed = false
+    change_windows("answerbox", screen_num)
+  }
+  else{
+    settings_showed = true
+    change_windows("settingbox", screen_num)
+  }
+}
+
+
+
+function stop_screen(num_screen) {
+   clearInterval(Screen[num_screen].timer)
+   Screen[num_screen].status =  "countdown_stopped"
+   change_status_arrays(num_screen,"countdown_stopped")
+   change_window("taskbox", num_screen)
+}
+
+function create_screen(n) {
+
+  $('#navbar_screens_num_tablo').html(n);
+  for (var i=0; i<=n; i++){
+    if (Screen.length < i+1){
+      x = new Object()
+      x.name = screen_set.name + i.toString()
+      x.points = screen_set.points
+      x.module = screen_set.module
+      x.checked_digits = screen_set.checked_digits.slice()
+      x.operation = screen_set.operation
+      x.digits_num = screen_set.digits_num
+      x.half = screen_set.half
+      x.summands_num = screen_set.summands_num
+      x.interval = screen_set.interval
+      x.all_checked = screen_set.all_checked
+      x.example = screen_set.example
+      x.example_numbers = screen_set.example_numbers
+      x.progress_mode = screen_set.progress_mode
+      x.progress_key = screen_set.progress_key
+      x.progress_select_key = screen_set.progress_select_key
+      x.timer = screen_set.timer
+      x.status = screen_set.status
+      x.num_summand = screen_set.num_summand
+      x.correct_answer = screen_set.correct_answer
+      x.box_type = screen_set.box_type
+      x.fontsize = screen_set.fontsize
+      Screen.push(x)
+    }
+  }
+  Global_stop()
+  for (var i=1; i<=screen_num; i++){
+    window_task_id="#window_task_"+i;
+    $(window_task_id).remove()
+    stop_screen(i)
+  }
+  screen_num=n;
+
+  if (n<=3){
+    wtheight = "90vh"
+    // taskbox_font_size = "75vh"
+    taskbox_height = "83vh"
+    answerbox_font_size = "15vh"
+    answerbox_height = "83vh"
+  }
+  else{
+    wtheight = "45vh"
+    // taskbox_font_size = "40vh"
+    taskbox_height = "40vh"
+    empty_class= ""
+    settings_class = ""
+    answerbox_font_size = "7vh"
+    answerbox_height = "40vh"
+  }
+  switch(n){
+    case 1:
+      wtcol_class="col-lg-12 col-md-12 col-sm-12"
+      empty_class= "col-lg-3 "
+      settings_class = "col-lg-6"
+    break;
+    case 2:
+      wtcol_class="col-lg-6 col-md-6 col-sm-6"
+      empty_class= "col-lg-2 col-md-2 col-sm-2"
+      settings_class = "col-lg-8 col-md-8 col-sm-8"
+    break;
+    case 3:
+      wtcol_class="col-lg-4 col-md-4 col-sm-4"
+      empty_class= ""
+      settings_class = ""
+    break;
+    case 4:
+      wtcol_class="col-lg-6 col-md-6 col-sm-6"
+      empty_class= "col-lg-2 col-md-2 col-sm-2"
+      settings_class = "col-lg-8 col-md-8 col-sm-8"
+    break;
+    case 5:
+      wtcol_class1="col-lg-4 col-md-4 col-sm-4"
+      wtcol_class2 = "col-lg-6 col-md-6 col-sm-6"
+      empty_class2= "col-lg-2 col-md-2 col-sm-2"
+      settings_class2 = "col-lg-8"
+    break;
+    case 6:
+      wtcol_class="col-lg-4 col-md-4 col-sm-4"
+    break;
+    case 7:
+
+      wtcol_class1="col-lg-3 col-md-3 col-sm-3"
+      wtcol_class2 = "col-lg-4 col-md-4 col-sm-4"
+      empty_class2= "col-lg-1 col-md-1 col-sm-1"
+      settings_class2 = "col-lg-10 col-md-10 col-sm-10"
+    break;
+    case 8:
+      wtcol_class="col-lg-3 col-md-3 col-sm-3"
+
+    break;
+  }
+  for (var i=0; i<=n; i++){
+    taskbox_font_size = change_fontsize("",i)
+    Screen[i].fontsize =   taskbox_font_size
+    taskbox_font_size_txt = "шрифт: " + parseInt(taskbox_font_size)
+    if (i==0){
+      $("#wt0fontsize_tablo").html(parseInt(taskbox_font_size))
+    }
+    else{
+    if (n==5){
+      if (i<=3){
+        wtcol_class = wtcol_class1
+      }
+      else{
+        wtcol_class = wtcol_class2
+        empty_class= empty_class2
+        settings_class = settings_class2
+      }
+    }
+    else if (n==7){
+      if (i<=4){
+        wtcol_class = wtcol_class1
+      }
+      else{
+        wtcol_class = wtcol_class2
+        empty_class= empty_class2
+        settings_class = settings_class2
+      }
+    }
+
+      screen =
+      "<div id = 'window_task_" + i + "' style='margin:0;padding:0; border-left: 1px dotted #999999; border-top: 1px dotted #999999; height:" + wtheight + "' class = '" + wtcol_class + "' >\
+        <div id='window_settings_" + i + "' class=''>\
+          <div class='" + empty_class + "' ></div>\
+          <div class='panel-body " + settings_class + "' style='text-align:center; padding:5;'>\
+            <h5 class='white_style' style='padding:0; margin-top:0; cursor:pointer'><span id='wt" + i + "heading' onclick='change_name(" + i + ")'></span> ( <span id='wt" + i + "points' class='hidden'></span> ) </h5>\
+            <div class='btn-group btn-group-justified'>\
+                  <a  id = 'wt" + i + "btn_module_1' onclick = 'change_module(1, true," + i + "); ' style = ' text-transform:  none'  class='btn btn-sm white_style8 btn-default active' title='Простой счет'>Просто</a>\
+                  <a  id = 'wt" + i + "btn_module_2' onclick = 'change_module(2,true," + i + "); ' class='btn btn-sm white_style8 btn-default' title='Помощь брата' style = ' text-transform:  none; color:'>Брат</a>\
+                  <a  id = 'wt" + i + "btn_module_3' onclick = 'change_module(3,true," + i + "); ' class='btn btn-sm white_style8 btn-default' title='Помощь друга' style = ' text-transform:  none'>Друг</a>\
+                  <a  id = 'wt" + i + "btn_module_4' onclick = 'change_module(4,true," + i + "); ' class='btn btn-sm white_style8 btn-default' title='Комбинированный счет' style = ' text-transform:  none'>Комбо</a>\
+                  <a  id = 'wt" + i + "btn_module_5' onclick = 'change_module(5,true," + i + "); ' class='btn btn-sm white_style8 btn-default' title='Произвольный счет' style = ' text-transform:  none'>Произв</a>\
+            </div>  \
+            <div class='btn-group btn-group-justified'>\
+              <a  id = 'wt" + i + "btn_1'  class='btn btn-sm white_style8 btn-default active hidden' onclick = 'check_digit(1, " + i + ");' >1</a>\
+              <a  id = 'wt" + i + "btn_2'  class='btn btn-sm white_style8 btn-default active hidden' onclick = 'check_digit(2," + i + ");'>2</a>\
+              <a  id = 'wt" + i + "btn_3'  class='btn btn-sm white_style8 btn-default active hidden' onclick = 'check_digit(3," + i + ");'>3</a>\
+              <a  id = 'wt" + i + "btn_4'  class='btn btn-sm white_style8 btn-default active hidden' onclick = 'check_digit(4," + i + ");'>4</a>\
+              <a  id = 'wt" + i + "btn_5'  class='btn btn-sm white_style8 btn-default active' onclick = 'check_digit(5," + i + ");'>5</a>\
+              <a  id = 'wt" + i + "btn_6'  class='btn btn-sm white_style8 btn-default active' onclick = 'check_digit(6," + i + ");'>6</a>\
+              <a  id = 'wt" + i + "btn_7'  class='btn btn-sm white_style8 btn-default active' onclick = 'check_digit(7," + i + ");'>7</a>\
+              <a  id = 'wt" + i + "btn_8'  class='btn btn-sm white_style8 btn-default active' onclick = 'check_digit(8," + i + ");'>8</a>\
+              <a  id = 'wt" + i + "btn_9'  class='btn btn-sm white_style8 btn-default active' onclick = 'check_digit(9," + i + ");'>9</a>\
+            </div> </br>\
+            <div class='btn-group btn-group-justified'>\
+              <a  class='btn btn-sm white_style8 btn-default' id = 'wt" + i + "btn_operation_0' title='   Сложение' onclick = 'change_operation(0," + i + ");'><b>+</b></a>\
+              <a  class='btn btn-sm white_style8 btn-default' id = 'wt" + i + "btn_operation_1' title='   Вычитание' onclick = 'change_operation(1," + i + ");'><b>-</b></a>\
+              <a  class='btn btn-sm white_style8 btn-default active' id = 'wt" + i + "btn_operation_2' title='   Сложение+Вычитание' onclick = 'change_operation(2," + i + ");'><b>+/-</b></a>\
+              <a  class='btn btn-sm white_style8 btn-default active' id = 'wt" + i + "btn_half' onclick = 'change_half(" + i + ");'>1/2</a>\
+              <a  class='btn btn-sm white_style8 btn-default' id = 'wt" + i + "btn_progress_mode' onclick = 'change_progress_mode(" + i + ");'>P</a>\
+            </div> \
+            <div class='btn-group btn-group-justified'> \
+                <a  class='btn btn-sm white_style8 btn-default ' onclick = 'change_digits_num(false," + i + ");'>◄</a>\
+                <a  class='btn btn-sm white_style8 btn-default active'  id = 'wt" + i + "digits_num_tablo' onclick = 'change_digits_num(0," + i + ");' style = ' text-transform:  none' >цифр: 1</a>\
+                <a  class='btn btn-sm white_style8 btn-default' onclick = 'change_digits_num(true," + i + ");'>►</a>\
+            </div> \
+            <div class='btn-group btn-group-justified'> \
+                <a  class='btn btn-sm white_style8 btn-default ' onclick = 'change_summands_num(false," + i + ");'>◄</a>\
+                <a  class='btn btn-sm white_style8 btn-default active'  id = 'wt" + i + "summands_num_tablo' onclick = 'change_summands_num(0," + i + ");' style = ' text-transform:  none' >4 слаг</a>\
+                <a  class='btn btn-sm white_style8 btn-default' onclick = 'change_summands_num(true," + i + ");'>►</a>\
+            </div> \
+            <div class='btn-group btn-group-justified'> \
+                <a  class='btn white_style8 btn-default btn-sm' onclick = 'change_interval(false," + i + ");'>◄</a>\
+                <a  class='btn white_style8 btn-default btn-sm active' id='wt" + i + "interval_tablo' onclick = 'change_interval(0," + i + ");' style = ' text-transform:  none'>1 сек</a>\
+                <a  class='btn white_style8 btn-default btn-sm' onclick = 'change_interval(true," + i + ");'>►</a>\
+            </div> \
+            <div class='btn-group btn-group-justified'> \
+                <a  class='btn white_style8 btn-default btn-sm' onclick = 'change_fontsize_f(false," + i + ");'>◄</a>\
+                <a  class='btn white_style8 btn-default btn-sm active' id='wt" + i + "fontsize_tablo' onclick = 'change_fontsize_f(0," + i + ");' style = ' text-transform:  none'>"+ taskbox_font_size_txt +"</a>\
+                <a  class='btn white_style8 btn-default btn-sm' onclick = 'change_fontsize_f(true," + i + ");'>►</a>\
+            </div> \
+          </div> \
+        </div>\
+      <input  class='form-control white_style hidden' id='wt" + i + "taskbox' type='number' value='' style='border-width:0; cursor: pointer;   text-align: center; font-size: "+ taskbox_font_size +"; height:"+ taskbox_height +";' onclick='start(3," + i + ")' ; readonly autofocus> \
+        <textarea  id='wt" + i + "answerbox' onclick='start(3," + i + ")' ; class='form-control white_style hidden'  type='text' value='►' style=' border-width:0; cursor: pointer;   text-align:  center; padding-top: 40; resize:none; overflow: hidden; padding-bottom:20%; font-size: "+ answerbox_font_size +"; height:"+ answerbox_height +";  ' readonly autofocus> </textarea>\
+        <div class='btn-group btn-group-justified ' id='wt" + i + "answerbox_btn'>\
+          <a class='btn btn-default btn-sm white_style8 hidden' style='padding:0; font-size: 20' title='Показать настройки' onclick='change_window(0," + i + ")' id='wt" + i + "answerbox_btn_settings'><b>S</b></a>\
+          <a class='btn btn-default btn-sm white_style8 hidden' style='padding:0; font-size: 20' title='Повторить пример' onclick='start_repeat(" + i + ")' id='wt" + i + "answerbox_btn_repeat'><b>&#8634;</b></a>\
+          <a class='btn btn-default btn-sm white_style8 hidden' title='Показать пример'  id='wt" + i + "answerbox_btn_show_example' onclick='show_example(" + i + ")'><b>=</b></a>\
+          <a class='btn btn-default btn-sm white_style8' title='Следующий пример' onclick='start(false," + i + ")' id='wt" + i + "answerbox_btn_settings_next' ><b>►</b></a>\
+        </div>\
+    </div>"
+    $("#window_task").append(screen)
+    }
+    if (white_style==true)
+      $("#wt" + i + "taskbox").css("color",colors[5])
+    if(screen_num<=3)
+      $(".btn-sm.white_style8").toggleClass("btn-sm btn-lg")
+    else
+      $(".btn-lg").toggleClass("btn-sm btn-lg")
+    heading = "#wt" + i + "heading"
+    $(heading).html(Screen[i].name)
+
+    points = "#wt" + i + "points"
+    $(points).html(Screen[i].points)
+
+    change_module(Screen[i].module,false,i);
+
+    for (var j=1; j<=9; j++){
+        btn_id = '#wt' + i + 'btn_'+ j;
+        $(btn_id).removeClass('active')
+    }
+    checked_digits = Screen[i].checked_digits.slice()
+    for (var j=0; j< checked_digits.length; j++){
+      btn_id = '#wt' + i + 'btn_'+ checked_digits[j];
+      $(btn_id).addClass('active')
+    }
+    change_operation(Screen[i].operation,i)
+
+    btn_id = '#wt' + i + 'btn_half';
+    if (Screen[i].half == true)
+      $(btn_id).addClass('active')
+    else
+      $(btn_id).removeClass('active')
+
+    com = '#wt' + i + 'btn_progress_mode';
+    if (Screen[i].progress_mode == true)
+      $(com).addClass('active')
+    else
+      $(com).removeClass('active')
+
+    digits_num = Screen[i].digits_num
+    com = '#wt' + i + 'digits_num_tablo'
+    if (digits_num == 1)
+      str = digits_num.toString() + ' цифра'
+    else if (digits_num>=2 && digits_num<=4)
+      str = digits_num.toString() + ' цифры'
+    else
+      str = digits_num.toString() + ' цифр'
+    $(com).html(str)
+
+    summands_num = Screen[i].summands_num
+    com = '#wt' + i + 'summands_num_tablo'
+    str = summands_num.toString() + ' слаг'
+    $(com).html(str)
+
+    interval = Screen[i].interval
+    com = '#wt' + i + 'interval_tablo'
+    str =(interval*0.001).toFixed(1).toString() + ' сек'
+    $(com).html(str)
+  }
+
+  change_style()
+  change_style()
+
+}
+
+function change_module(module,user,num_screen) {
+  if (isNaN(num_screen)){
+    switch(module){
+      case true:
+        n = Screen[0].module
+        if (n==5)
+          n = 1
+        else
+          n++
+        change_module(n,true)
+      break;
+      case false:
+         n = Screen[0].module
+        if (n==1)
+          n=5
+        else
+          n--
+        change_module(n,true)
+      break;
+      case 0:
+        change_module(Screen[0].module,true)
+      break;
+      case 1:
+        $("#navbar_module_tablo").html("просто")
+      break;
+      case 2:
+        $("#navbar_module_tablo").html("брат")
+      break;
+      case 3:
+        $("#navbar_module_tablo").html("друг")
+      break;
+      case 4:
+        $("#navbar_module_tablo").html("комбо")
+      break;
+      case 5:
+        $("#navbar_module_tablo").html("произв")
+      break;
+    }
+    if (module!==0 && module!==true && module!==false){
+      for (var i=1; i<=screen_num; i++){
+        Screen[i].checked_digits = Screen[0].checked_digits
+        Screen[i].module = Screen[0].module
+      }
+      for (var i=-1; i<=screen_num; i++){
+        change_module(module,user,i)
+      }
+    }
+  }
+  else{
+    if (num_screen==-1)
+      This_screen = Screen[0]
+    else
+      This_screen = Screen[num_screen]
+    prev_module = This_screen.module
+    This_screen.module=3;
+    if (user == true){
+      if (prev_module == module && module != 5){
+        if (This_screen.all_checked == true){
+          This_screen.checked_digits = []
+          This_screen.all_checked = false
+          for (var i=1; i<=9; i++){
+            btn_id = '#wt' + num_screen + 'btn_'+ i;
+            $(btn_id).removeClass('active')
+          }
+        }
+        else{
+          This_screen.all_checked = true
+          This_screen.checked_digits = [1,2,3,4,5,6,7,8,9].slice()
+          for (var i=1; i<=9; i++){
+            btn_id = '#wt' + num_screen + 'btn_'+ i;
+            $(btn_id).addClass('active')
+          }
+        }
+      }
+      else{
+        This_screen.checked_digits = [1,2,3,4,5,6,7,8,9].slice()
+        This_screen.all_checked = false
+        for (var i=1; i<=9; i++){
+            btn_id = '#wt' + num_screen + 'btn_'+ i;
+            $(btn_id).addClass('active')
+          }
+      }
+    }
+    This_screen.module=module;
+
+    for (var i=1; i<=5; i++){
+      btn_module_id = '#wt' + num_screen + 'btn_module_'+ i;
+      $(btn_module_id).removeClass('active')
+    }
+    btn_module_id = '#wt' + num_screen + 'btn_module_'+ module;
+    $(btn_module_id).addClass('active')
+
+    switch(module){
+      case 1:
+        for (var i=1; i<=4; i++){
+          btn_id = '#wt' + num_screen + 'btn_'+ i;
+          $(btn_id).addClass('hidden')
+        }
+        for (var i=5; i<=9; i++){
+          btn_id = '#wt' + num_screen + 'btn_'+ i;
+          $(btn_id).removeClass('hidden')
+        }
+      break;
+      case 2:
+        for (var i=1; i<=4; i++){
+          btn_id = '#wt' + num_screen + 'btn_'+ i;
+          $(btn_id).removeClass('hidden')
+        }
+        for (var i=5; i<=9; i++){
+          btn_id = '#wt' + num_screen + 'btn_'+ i;
+          $(btn_id).addClass('hidden')
+        }
+      break;
+      case 3:
+        for (var i=1; i<=9; i++){
+          btn_id = '#wt' + num_screen + 'btn_'+ i;
+          $(btn_id).removeClass('hidden')
+        }
+      break;
+      case 4:
+        for (var i=1; i<=5; i++){
+          btn_id = '#wt' + num_screen + 'btn_'+ i;
+          $(btn_id).addClass('hidden')
+        }
+        for (var i=6; i<=9; i++){
+          btn_id = '#wt' + num_screen + 'btn_'+ i;
+          $(btn_id).removeClass('hidden')
+        }
+      break;
+      case 5:
+        for (var i=1; i<=9; i++){
+          btn_id = '#wt' + num_screen + 'btn_'+ i;
+          $(btn_id).addClass('invisible')
+        }
+      break;
+    }
+  }
+
+}
+
+function check_digit(digit, num_screen) {
+  if (isNaN(num_screen)){
+    for (var i=1; i<=screen_num; i++){
+      Screen[i].checked_digits = Screen[0].checked_digits
+    }
+    for (var i=-1; i<=screen_num; i++){
+      check_digit(digit, i)
+    }
+  }
+  else{
+    if (num_screen==-1)
+      This_screen = Screen[0]
+    else
+      This_screen = Screen[num_screen]
+    if (This_screen.module==1){
+      if (digit<=4){
+        btn_id = '#wt' + num_screen + 'btn_'+ digit;
+        $(btn_id).toggleClass('active')
+        toggle_array(digit,This_screen.checked_digits)
+      }
+      else{
+        btn_id = '#wt' + num_screen + 'btn_'+ digit;
+        if ($(btn_id).hasClass('active')){
+          for (var i=digit; i<=9; i++){
+            btn_id = '#wt' + num_screen + 'btn_'+ i;
+            $(btn_id).removeClass('active')
+            exclude(i,This_screen.checked_digits)
+          }
+        }
+        else{
+          for (var i=5; i<=digit; i++){
+            btn_id = '#wt' + num_screen + 'btn_'+ i;
+            $(btn_id).addClass('active')
+            include(i,This_screen.checked_digits)
+          }
+        }
+      }
+    }
+    else{
+      btn_id = '#wt' + num_screen + 'btn_'+ digit;
+      $(btn_id).toggleClass('active')
+      toggle_array(digit,This_screen.checked_digits)
+    }
+  }
+
+}
+
+function change_operation(operation, num_screen) {
+  if (isNaN(num_screen)){
+    switch (operation){
+      case "r":
+        n=Screen[0].operation;
+        if (n==2)
+          n=0
+        else
+          n++
+        change_operation(n)
+      break;
+      case "l":
+        n=Screen[0].operation;
+        if (n==0)
+          n=2
+        else
+          n--
+        change_operation(n)
+      break;
+      case 0:
+        $("#navbar_operation_tablo").html("Слож")
+      break;
+      case 1:
+        $("#navbar_operation_tablo").html("Выч")
+      break;
+      case 2:
+        $("#navbar_operation_tablo").html("Слож/Выч")
+      break;
+    }
+    if (operation!="l" && operation!="r"){
+      for (var i=1; i<=screen_num; i++){
+        Screen[i].operation = Screen[0].operation
+      }
+      for (var i=0; i<=screen_num; i++){
+        change_operation(operation, i)
+      }
+    }
+
+  }
+  else{
+    for (var i=0; i<=2; i++){
+      btn_id = '#wt' + num_screen + 'btn_operation_'+ i;
+      $(btn_id).removeClass('active')
+    }
+    btn_id = '#wt' + num_screen + 'btn_operation_'+ operation;
+    $(btn_id).addClass('active')
+    Screen[num_screen].operation = operation;
+  }
+}
+function change_half(num_screen) {
+  if (isNaN(num_screen)){
+    $("#nabvar_btn_half").toggleClass("active")
+    for (var i=0; i<=screen_num; i++){
+      Screen[i].half = Screen[0].half
+      change_half(i)
+    }
+  }
+  else{
+    btn_id = '#wt' + num_screen + 'btn_half';
+    $(btn_id).toggleClass('active')
+    if (Screen[num_screen].half == true)
+      Screen[num_screen].half = false
+    else
+      Screen[num_screen].half = false
+  }
+}
+
+function change_progress_mode(num_screen) {
+  if (isNaN(num_screen)){
+    $("#navbar_progress_mode").toggleClass("active")
+    for (var i=1; i<=screen_num; i++){
+      Screen[i].progress_mode = Screen[0].progress_mode
+    }
+    for (var i=0; i<=screen_num; i++){
+      change_progress_mode(i)
+    }
+  }
+  else{
+    com = "#wt" + num_screen + "btn_progress_mode"
+    $(com).toggleClass("active")
+    progress_mode = Screen[num_screen].progress_mode
+    Screen[num_screen].progress_mode = !progress_mode
+  }
+}
+
+function change_digits_num(operation, num_screen) {
+  if (isNaN(num_screen)){
+    for (var i=1; i<=screen_num; i++){
+        Screen[i].digits_num = Screen[0].digits_num
+    }
+    switch (operation){
+      case false:
+        n=Screen[0].digits_num
+        if (n>1)
+          n--
+        change_digits_num(n)
+      break;
+
+      case true:
+        n=Screen[0].digits_num
+        if (n<8)
+          n++
+        change_digits_num(n)
+      break;
+
+      case 0:
+        var t = Math.abs(parseInt(prompt("  Введите количестов цифр в пределах от 1 до 8   ")));
+        if (!(isNaN(t) || t < 1 || t > 8)) {
+            digits_num = t
+        }
+        for (var i=0; i<=screen_num; i++){
+          Screen[i].digits_num = digits_num
+          com = '#wt' + i + 'digits_num_tablo'
+          if (digits_num == 1) digits_num_str = digits_num.toString() + ' цифра'
+          else if (digits_num>=2 && digits_num<=4)  digits_num_str = digits_num.toString() + ' цифры'
+          else digits_num_str = digits_num.toString() + ' цифр'
+          $(com).html(digits_num_str)
+          change_fontsize("",i)
+        }
+      break;
+    }
+    if (operation!==0){
+      for (var i=0; i<=screen_num; i++){
+        change_digits_num(operation, i)
+      }
+    }
+     $("#navbar_digits_num_tablo").html(digits_num)
+  }
+  else{
+    This_screen=Screen[num_screen]
+    digits_num = This_screen.digits_num
+    switch(operation){
+      case false: //minus
+        if (digits_num > 1){
+          digits_num--
+        }
+      break;
+      case true: //plus
+        if (digits_num < 8){
+          digits_num++
+        }
+        break;
+      case 0: //enter
+        var t = Math.abs(parseInt(prompt("  Введите количестов цифр в пределах от 1 до 8   ")));
+        if (!(isNaN(t) || t < 1 || t > 8)) {
+          digits_num = t
+        }
+      break;
+    }
+    This_screen.digits_num = digits_num
+    com = '#wt' + num_screen + 'digits_num_tablo'
+    if (digits_num == 1) digits_num_str = digits_num.toString() + ' цифра'
+    else if (digits_num>=2 && digits_num<=4)  digits_num_str = digits_num.toString() + ' цифры'
+    else digits_num_str = digits_num.toString() + ' цифр'
+    $(com).html(digits_num_str)
+    if (mode=="random"){
+      for (var i=1; i<=8; i++){
+        change_fontsize(Screen[1].fontsize,i)
+      }
+    }
+    else
+      change_fontsize("",num_screen)
+  }
+
+}
+
+function change_summands_num(operation, num_screen) {
+  if (isNaN(num_screen)){
+    for (var i=1; i<=screen_num; i++){
+        Screen[i].summands_num = Screen[0].summands_num
+    }
+    summands_num = Screen[0].summands_num
+    switch(operation){
+      case true:
+        if (summands_num<70){
+          summands_num++
+          for (var i=0; i<=screen_num; i++){
+            change_summands_num(operation, i)
+          }
+        }
+      break;
+      case false:
+        if (summands_num>1){
+          summands_num--
+          for (var i=0; i<=screen_num; i++){
+            change_summands_num(operation, i)
+          }
+        }
+      break;
+      case 0:
+        var t = Math.abs(parseInt(prompt("  Введите количестов цифр в пределах от 1 до 70   ")));
+        if (!(isNaN(t) || t < 1 || t > 70)) {
+            x = t
+        }
+        for (var i=0; i<=screen_num; i++){
+          Screen[i].summands_num = x
+          summands_num=x
+          com = '#wt' + i + 'summands_num_tablo'
+          str = x.toString() + ' слаг'
+          $(com).html(str)
+        }
+
+      break;
+    }
+    if (operation!==true && operation!==false){
+      $("#navbar_summands_num").html(operation)
+      for (var i=0; i<=screen_num; i++){
+        Screen[i].summands_num = operation
+        com = '#wt' + i + 'summands_num_tablo'
+        str = operation + ' слаг'
+        $(com).html(str)
+      }
+    }
+     $("#navbar_summands_num_tablo").html(summands_num)
+  }
+  else{
+    var x = Screen[num_screen].summands_num
+    switch(operation){
+      case false: //minus
+        if (x > 1){
+          x--
+        }
+      break;
+
+      case 0: //enter
+        var t = Math.abs(parseInt(prompt("  Введите количестов цифр в пределах от 1 до 70   ")));
+        if (!(isNaN(t) || t < 1 || t > 70)) {
+          x = t
+        }
+      break;
+      case true: //plus
+        if (x < 70){
+          x++
+        }
+      break;
+    }
+    Screen[num_screen].summands_num = x
+    com = '#wt' + num_screen + 'summands_num_tablo'
+    str = x.toString() + ' слаг'
+    $(com).html(str)
+  }
+}
+
+function change_interval(operation, num_screen) {
+  if (isNaN(num_screen)){
+    for (var i=1; i<=screen_num; i++){
+        Screen[i].interval = Screen[0].interval
+    }
+    interval = Screen[0].interval
+    switch(operation){
+      case true:
+        if (interval<7000){
+          interval+=100
+          for (var i=0; i<=screen_num; i++){
+            change_interval(operation, i)
+          }
+        }
+      break;
+      case false:
+        if (interval>100){
+          interval-=100
+          for (var i=0; i<=screen_num; i++){
+            change_interval(operation, i)
+          }
+        }
+      break;
+      case 0:
+        var t = Math.abs(parseFloat(prompt("  Введите количестов цифр в пределах от 0.1 до 7 сек   ")));
+        if (!(isNaN(t) || t < 0.1 || t > 7)) {
+          x = parseInt(t*1000)
+        }
+          for (var i=0; i<=screen_num; i++){
+            Screen[i].interval = x
+            interval = x
+            com = '#wt' + i + 'interval_tablo'
+            str =(x*0.001).toFixed(1).toString() + ' сек'
+            $(com).html(str)
+          }
+      break;
+    }
+    if (operation!==true && operation!==false){
+      for (var i=0; i<=screen_num; i++){
+        Screen[i].interval = operation*1000
+
+        com = '#wt' + i + 'interval_tablo'
+        str = operation + ' сек'
+        $(com).html(str)
+      }
+    }
+    interval = parseFloat(0.001*interval).toFixed(1)
+    $("#navbar_interval_tablo").html(interval)
+  }
+  else{
+    if (mode!="random" && screen_num > 1)
+      mode = "asynchro"
+    var x = Screen[num_screen].interval
+    switch(operation){
+      case false: //minus
+        if (x > 100){
+          x-=100
+        }
+      break;
+
+      case 0: //enter
+        var t = Math.abs(parseFloat(prompt("  Введите количестов цифр в пределах от 0.1 до 7 сек   ")));
+        if (!(isNaN(t) || t < 0.1 || t > 7)) {
+          x = parseInt(t*1000)
+        }
+      break;
+      case true: //plus
+        if (x < 7000){
+          x+=100
+        }
+      break;
+    }
+    Screen[num_screen].interval = x
+    com = '#wt' + num_screen + 'interval_tablo'
+    str =(x*0.001).toFixed(1).toString() + ' сек'
+    $(com).html(str)
+  }
+
+}
+
+fontsize_vw="35vw"
+
+function change_fontsize(fontsize, num_screen){
+
+    if (fontsize ==""){
+      digits_num = Screen[num_screen].digits_num
+      if (digits_num==4) k = 1
+      else if (digits_num>=5) k = 2
+      else k=0
+      digits_num = Screen[num_screen].digits_num
+      fontsize2 = parseInt(100/(screen_num + digits_num +k)) + "vw"
+    }
+    else{
+      fontsize2 = fontsize
+      Screen[num_screen].fontsize = fontsize2
+    }
+    com = "#wt" + num_screen.toString() + "taskbox"
+    $(com).css("font-size", fontsize2)
+
+    return  fontsize2;
+}
+
+function change_fontsize_f(operation, num_screen) {
+  if (isNaN(num_screen)){
+    for (var i=1; i<=screen_num; i++){
+        Screen[i].fontsize = Screen[0].fontsize
+    }
+    fontsize = parseInt(Screen[0].fontsize)
+    switch(operation){
+      case true:
+        if (fontsize<100){
+          fontsize++
+          for (var i=0; i<=screen_num; i++){
+            change_fontsize_f(operation, i)
+          }
+        }
+      break;
+      case false:
+        if (fontsize>5){
+          fontsize--
+          for (var i=0; i<=screen_num; i++){
+            change_fontsize_f(operation, i)
+          }
+        }
+      break;
+      case 0:
+        var t = Math.abs(parseInt(prompt("  Введите шрифт в пределах от 5 до 100 сек   ")));
+          if (!(isNaN(t) || t < 5 || t > 100)) {
+            fontsizex = t
+            fontsize = t
+            for (var i=0; i<=screen_num; i++){
+              fontsizevw = fontsizex + "vw"
+              change_fontsize(fontsizevw,i)
+              if (i==0)
+                $("#wt"+i+"fontsize_tablo").html(fontsizex)
+              else
+                $("#wt"+i+"fontsize_tablo").html("шрифт: " + fontsizex)
+          }
+
+        }
+      break;
+    }
+    $("#navbar_fontsize_tablo").html(fontsize)
+  }
+  else{
+    fontsize = parseInt(Screen[num_screen].fontsize);
+    switch (operation){
+      case false: //minus
+        if (fontsize>5){
+          fontsize--
+
+        }
+      break;
+      case 0: //enter
+        var t = Math.abs(parseInt(prompt("  Введите шрифт в пределах от 5 до 100 сек   ")));
+        if (!(isNaN(t) || t < 5 || t > 100)) {
+          fontsize = t
+        }
+      break;
+      case true: //plus
+        if (fontsize<100){
+          fontsize++
+        }
+      break;
+    }
+    fontsizevw = fontsize + "vw"
+    change_fontsize(fontsizevw,num_screen)
+    if (num_screen==0)
+      $("#wt"+num_screen+"fontsize_tablo").html(fontsize)
+    else
+      $("#wt"+num_screen+"fontsize_tablo").html("шрифт: " + fontsize)
+  }
+
+}
+
+function change_screens_num(operation) {
+    n = screen_num
+    switch (operation){
+      case false: //minus
+        if (n>1){
+          n--
+        }
+      break;
+      case 0: //enter
+        var t = Math.abs(parseInt(prompt("  Введите количество кранов в пределах от 5 до 100 сек   ")));
+        if (!(isNaN(t) || t < 1 || t > 8)) {
+          n = t
+        }
+      break;
+      case true: //plus
+        if (n<8){
+          n++
+        }
+      break;
+    }
+    create_screen(n)
+}
+
+function unrandom_mode_f(){
+  if (mode=="random")
+    mode = "synchro"
+}
+function random_mode_f(){
+  create_screen(8)
+  mode = "random"
+  $('#navbar_screen_num').html('Р');
+  create_screen(1)
+}
+
+var style = true, voice=true, interval = []
+var task = {};
+
+
+function change_style(){
+  if (white_style==true) {
+    document.getElementById("navbar_logo").style.backgroundImage = "url( ../assets/images/s5_logo.png)"
+    $(".white_style8").toggleClass("white_style8 black_style8")
+    $(".white_style").toggleClass("white_style black_style")
+    $(".navbar-default").toggleClass("navbar-inverse navbar-default")
+      white_style=false
+    }
+  else {
+    document.getElementById("navbar_logo").style.backgroundImage = "url( ../assets/images/logo_rus.png)"
+
+    $(".black_style").toggleClass("white_style black_style")
+    $(".black_style8").toggleClass("white_style8 black_style8")
+    $(".navbar-inverse").toggleClass("navbar-inverse navbar-default")
+    white_style=true
+  }
+}
+font = 0
+function change_font(operation){
+  if (operation==true){
+    if (font==4)
+      font=0
+    else
+      font++
+  }
+  else if (operation==false){
+    if (font==0)
+      font=4
+    else
+      font--
+  }
+  else if (isNaN(operation)){
+    font = parseInt($('#select').selectedIndex)
+  }
+  for (var i=0; i<=8;i++){
+      taskbox_id="#wt" +i + "taskbox"
+      	switch(font){
+      		case 0:
+            $(taskbox_id).css("fontFamily","Arial")
+      		break;
+      		case 1:
+      			$(taskbox_id).css("fontFamily","Jokerman")
+      		break;
+      		case 2:
+      			$(taskbox_id).css("fontFamily","DFPOP1-W9")
+      		break;
+      		case 3:
+      			$(taskbox_id).css("fontFamily","Playbill")
+      		break;
+          case 4:
+            $(taskbox_id).css("fontFamily","Showcard Gothic")
+          break;
+
+      	}
+  }
+}
+
+var audio = new Audio();
+var audio2 = new Audio();
+function soundClick2(u,r) {
+  var t = 0;
+  var music = "";
+  if (r == 1){
+    switch (u){
+      case 0:
+        t = random_between(1,48);
+        music = 'new_incorrect-'+ t   + '.mp3';
+      break;
+      case 1:
+        t = random_between(1,19);
+        music = 'new_correct-'+ t   + '.mp3';
+      break;
+      case 2:
+        t = random_between(1,58);
+        music = 'new_present-'+ t   + '.mp3';
+      break;
+
+    }
+    audio.src = " ../assets/audios/" + music;
+    audio.play()
+  }
+  else {audio.pause();
+      audio.currentTime = 0.0;}
+}
+
+function soundClick(n) {
+  if (chered == true) {
+    audio.src = " ../assets/audios/new_sound_"+n.toString() + '.mp3'
+    audio.play()
+  }
+  else{
+    audio2.src = " ../assets/audios/new_sound_"+n.toString() + '.mp3'
+    audio2.play()
+  }
+  chered = !chered
+}
+
+var start_ok = true;
+
+window.onload=function(){
+  if (document.body.clientWidth <= '1024')
+    $("#navbar_logo").css("width" ,"30px")
+  create_screen(1)
+  // change_style()
+  // change_windows("settingbox",1)
+  for (var i=1;i<=47;i++ ){
+    var audio = document.createElement('audio');
+    src = " ../assets/audios/new_incorrect-"+ i + ".mp3"
+    audio.setAttribute('src',src);
+    audio.setAttribute('preload','preload');
+  }
+  for (var i=1;i<=17;i++ ){
+    var audio = document.createElement('audio');
+    src = " ../assets/audios/new_correct-"+ i + ".mp3"
+    audio.setAttribute('src',src);
+    audio.setAttribute('preload','preload');
+  }
+  for (var i=1;i<=57;i++ ){
+    var audio = document.createElement('audio');
+    src = " ../assets/audios/new_present-"+ i + ".mp3"
+    audio.setAttribute('src',src);
+    audio.setAttribute('preload','preload');
+  }
+  for (var i=1;i<=4;i++ ){
+    var audio = document.createElement('audio');
+    src = " ../assets/audios/new_snd_"+ i + ".mp3"
+    audio.setAttribute('src',src);
+    audio.setAttribute('preload','preload');
+  }
+
+    for (var i=1;i<=99;i++ ){
+      var audio = document.createElement('audio');
+      src = " ../assets/audios/numbers/gplus_"+ i + ".mp3"
+      audio.setAttribute('src',src);
+      audio.setAttribute('preload','preload');
+    }
+    for (var i=1;i<=99;i++ ){
+      var audio = document.createElement('audio');
+      src = " ../assets/audios/numbers/gminus_"+ i + ".mp3"
+      audio.setAttribute('src',src);
+      audio.setAttribute('preload','preload');
+    }
+
+
+  change_background();
+}
+
+var image_schotchik = 0;
+function show_example(num_screen){
+  $("#wt" + num_screen + "answerbox").val(Screen[num_screen].example)
+}
+
+function change_background(){
+  image_schotchik = random_between(1,27)
+  var image_fon = "fon_" + image_schotchik + ".jpg";
+  document.body.style.backgroundImage = 'url( ../assets/images/backgrounds/'+image_fon +')';
+  image_schotchik = parseInt(image_schotchik);
+}
+
+
+
+function open_global_settings(){
+  proccess = false
+  for (var i=1; i<=screen_num; i++){
+    status = Screen[i].status
+    if (status == "count_in_proccess" || status == "countdown_in_proccess" || status =="count_paused")
+      proccess = true
+  }
+  if (proccess == false)
+    $('#modal_settings').modal('show');
+}
+
+function restart(){
+  number_10=1
+  prav = 0;
+  vip = 0;
+  show_pravilno();
+  for (var i=1;i<=screen_num; i++){
+    points_id =  "#points_" + i.toString();
+    $(points_id).html("0")
+  }
+}
+
+
+function sychro_f(){
+  mode = "synchro"
+  for (var j=1; j<=8;j++){
+    interval_id = "#interval_"+j.toString()
+    $(interval_id).html($('#interval_tablo').html())
+    interval[j] = parseInt($('#interval_tablo').html()*1000)
+  }
+}
+
+
+
+document.onkeyup = function (e) {
+    e = e || window.event;
+    if (e.keyCode === 13|| e.keyCode === 32) {
+        Global_start();
+    }
+
+}
+
+
+function random_between(n,m){
+  var t = n + randomInteger(m - n);
+  return t;
+}
+
+
+function randomInteger (n) {
+  var d = Math.floor(Math.random()*(n-0.0001))
+  return d;
+}
+function power10(n){
+  var d = 1;
+  for (var i = 1; i <= n; i++) {
+    d *= 10;
+  }
+  return d;
+}
+
+function duplicat(b, c) {
+    for (var d = [], e = {}, f = {}, a = 0; a < b.length; a++) e[b[a]] = !0;
+    for (a = 0; a < c.length; a++) f[c[a]] = !0;
+    for (var g in e) f[g] && d.push(g);
+    return d;
+};
+function include(a,arr){
+  var c = false, i = 0;
+  while (c == false && i<arr.length) {
+    if (a == arr[i++]) c = true;
+  }
+  if (c == false) arr.push(a);
+  return arr;
+};
+
+function exclude(a,arr){
+  var c = false, i = 0;
+  while (c == false && i < arr.length) {
+    if (a == arr[i++]) {
+      c = true;
+    }
+  }
+  if (c == true) {
+    arr.splice(i-1,1);
+  }
+  return arr;
+}
+
+function toggle_array(a,arr){
+  var c = false, i = 0;
+  while (c == false && i < arr.length) {
+    if (a == arr[i++]) {
+      c = true;
+    }
+  }
+  if (c == true) {
+    arr.splice(i-1,1);
+  }
+  else
+    arr.push(a)
+  return arr;
+}
+var
+chislo = 0,
+chislo_plus_all = 0,
+znak = 0,
+schotchik = 0,
+cifr = [],
+possible_checked_var = [],
+chislo_plus = [],
+vip = 0,
+prav = 0,
+wb_Timer1,
+prav_percent = 0;
+
+
+  var correct = ['Молодец!','Восхитительно!','Хорошо делаешь!','Это внушительно!','Невероятно!',
+  'Отлично!','Превосходно!','Прекрасно!','Поразительно!','Эффектно!','Ты преуспеваешь!',
+  'Потрясающе!','Остроумно!','Безупречная работа!','То, что надо!','Чудесно!',
+  'Изумительно!','Потрудился на совесть!','Уже лучше!','Хороший ответ!',
+  'Ты это заслужил!','Блистательнно!','Какой ты способный!','Так держать!','Ну, это событие!',
+  'Ты смог!','Хорошо получается!','Сейчас лучше!','Ты справился!','Ты умеешь считать!',
+  'Хорошо подготовился!','Ты считаешь играя!','Ты на правильном пути!','На высшем уровне!','Здорово!',
+  'Какой прогресс!','Это мне нравится!','Необыкновенно!','Блестяще!','Можешь гордиться!',
+  'Замечательно!','Красота!','Нет слов!','Мастерски!','Ты настоящий мастер!',
+  'Это гениально!','Хорошо получается!','У тебя светлая голова!','Приятно смотреть!','Очаровательно!',
+  'Ты сообразителен!','Разумный ответ!','Стоящая работа!','Это достойно похвалы!','Ты прав!',
+  'Захватывающе!','Правильный ответ!','Правильно!','Другой уровень!'];
+
+
+
+ const POSSIBLE_CONST_PROSTO =
+[[[[0,1,2,3,4,5,6,7,8,9],[0,1,2,3,5,6,7,8],[0,1,2,5,6,7],[0,1,5,6],[0,5],[0,1,2,3,4],[0,1,2,3],[0,1,2],[0,1],[0]],
+   [[],[],[],[],[],[],[],[],[],[]]],
+
+ [[[],[],[],[],[],[],[],[],[],[]],
+   [[0],[0,1],[0,1,2],[0,1,2,3],[0,1,2,3,4],[0,5],[0,1,5,6],[0,1,2,5,6,7],[0,1,2,3,5,6,7,8],[0,1,2,3,4,5,6,7,8,9]]],
+
+ [[[0,1,2,3,4,5,6,7,8,9],[0,1,2,3,5,6,7,8],[0,1,2,5,6,7],[0,1,5,6],[0,5],[0,1,2,3,4],[0,1,2,3],[0,1,2],[0,1],[0]],
+   [[0],[0,1],[0,1,2],[0,1,2,3],[0,1,2,3,4],[0,5],[0,1,5,6],[0,1,2,5,6,7],[0,1,2,3,5,6,7,8],[0,1,2,3,4,5,6,7,8,9]]]];
+
+const POSSIBLE_CONST_BRAT =
+[[[[1,2,3,4],[4],[3,4],[2,3,4],[1,2,3,4],[0,1,2,3,4],[0,1,2,3],[0,1,2],[0,1],[0]],
+   [[0],[0,1],[0,1,2],[0,1,2,3],[0,1,2,3,4],[0,5],[5],[5,6],[5,6,7],[5,6,7,8]]],
+
+ [[[5,6,7,8],[5,6,7,8],[5,6,7],[5,6],[0,5],[0,1,2,3],[0,1,2],[0,1],[0,1],[0]],
+   [[0],[0,1],[0,1,2],[0,1,2,3],[0,1,2,3,4],[1,2,3,4],[2,3,4],[3,4],[4],[1,2,3,4]]],
+
+ [[[1,2,3,4],[4],[3,4],[2,3,4],[1,2,3,4],[0,1,2,3,4],[0,1,2,3],[0,1,2],[0,1],[0]],
+   [[0],[0,1],[0,1,2],[0,1,2,3],[0,1,2,3,4],[1,2,3,4],[2,3,4],[3,4],[4],[0,1,2,3,4,5,6,7,8,9]]]];
+
+
+const POSSIBLE_CONST_DRUG =
+[[[[3,4,5,6,7],[4,9],[4,3,8,9],[4,3,2,7,8,9],[6,7,8,9],[5],[4,5,9],[3,4,5,8,9],[2,3,4,5,7,8,9],[1,2,3,4,5,6,7,8,9]],
+   [[],[],[],[],[],[],[],[],[],[]]],
+
+ [[[],[],[],[],[],[],[],[],[],[]],
+  [[1,2,3,4,5,6,7,8,9],[2,3,4,5,7,8,9],[3,4,5,8,9],[4,5,9],[5],[6,7,8,9],[4,3,2,7,8,9],[4,3,8,9],[4,9],[3,4,5,6,7]]],
+
+ [[[3,4,5,6,7],[4,9],[4,3,8,9],[4,3,2,7,8,9],[6,7,8,9],[5],[4,5,9],[3,4,5,8,9],[2,3,4,5,7,8,9],[1,2,3,4,5,6,7,8,9]],
+   [[1,2,3,4,5,6,7,8,9],[2,3,4,5,7,8,9],[3,4,5,8,9],[4,5,9],[5],[6,7,8,9],[4,3,2,7,8,9],[4,3,8,9],[4,9],[3,4,5,6,7]]]];
+
+const POSSIBLE_CONST_COMBO =
+[[[[5,6,7,8],[5,6,7],[3,4,5,6],[2,3,4,5],[6,7,8,9],[6,7,8,9],[6,7,8],[6,7],[6,7,8],[6,7,8,9]],
+   [[],[],[],[],[],[],[],[],[],[]]],
+
+ [[[],[],[],[],[],[],[],[],[],[]],
+  [[6,7,8,9],[6,7,8],[6,7,8,9],[6,7,8],[6,7,8,9],[1,2,3],[1,2,3,4],[1,2,3,4,5],[1,2,3,4,5,6],[5,6,7,8]]],
+
+ [[[1,2,3,4,5,6,7,8],[5,6,7,9],[3,4,5,6],[2,3,4,5],[6,7,8,9],[6,7,8,9],[6,7,8],[6,7],[6,7,8],[6,7,8,9]],
+   [[6,7,8,9],[6,7,8],[6,7,8,9],[6,7,8],[6,7,8,9],[1,2,3],[1,2,3,4],[1,2,3,4,5],[1,2,3,4,5,6],[1,2,3,4,5,6,7,8]]]];
+
+
+function possible_checked (n,m){
+  var arrchecked = checked_digits.slice();
+  var initial =
+  [[[0,1,2,3,4,5,6,7,8,9],[0,1,2,3,5,6,7,8],[0,1,2,5,6,7],[0,1,5,6],[0,5],[0,1,2,3,4],[0,1,2,3],[0,1,2],[0,1],[0]],
+   [[0],[0,1],[0,1,2],[0,1,2,3],[0,1,2,3,4],[0,5],[0,1,5,6],[0,1,2,5,6,7],[0,1,2,3,5,6,7,8],[0,1,2,3,4,5,6,7,8,9]]];
+  var arr_possible = [[[],[],[],[],[],[],[],[],[],[]],
+                     [[],[],[],[],[],[],[],[],[],[]]];
+  if (n == 2){
+      for (var j = 0; j <= 1; j++){
+      for (var k = 0; k <= 9; k++){
+        arr_possible[j][k] = initial[j][k].slice();
+      }
+    }
+    }
+  switch (parseInt(n)) {
+    case 1:
+      for (var j = 0; j <= 1; j++){
+        for (var k = 0; k <= 9; k++){
+          arr_possible[j][k] = duplicat(arrchecked, POSSIBLE_CONST_PROSTO[m][j][k]);
+          if (arr_possible[j][k].length == 0){
+            arr_possible[j][k] = initial[j][k].slice();
+          }
+        }
+      }
+    break;
+    case 2:
+      for (var j = 0; j <= 1; j++){
+        for (var k = 0; k <= 9; k++){
+          arr_possible[j][k] = POSSIBLE_CONST_BRAT[m][j][k].slice();
+          }
+      }
+      switch (parseInt(m)){
+        case 0:
+          for (var k = 1; k <= 4; k++){
+            arr_possible[0][k] = duplicat(arrchecked, POSSIBLE_CONST_BRAT[m][0][k]);
+            if (arr_possible[0][k].length == 0 || arr_possible[0][k] == 0){
+              arr_possible[0][k] = initial[0][k].slice();
+            }
+          }
+        break;
+        case 1:
+          for (var k = 5; k <= 8; k++){
+            arr_possible[1][k] = duplicat(arrchecked, POSSIBLE_CONST_BRAT[m][1][k]);
+            if (arr_possible[1][k].length == 0 || arr_possible[1][k] == 0){
+              arr_possible[1][k] = initial[1][k].slice();
+            }
+          }
+        break;
+        case 2:
+          for (var k = 1; k <= 4; k++){
+            arr_possible[0][k] = duplicat(arrchecked, POSSIBLE_CONST_BRAT[m][0][k]);
+            if (arr_possible[0][k].length == 0 || arr_possible[0][k] == 0){
+              arr_possible[0][k] = initial[0][k].slice();
+            }
+          }
+          for (var k = 5; k <= 8; k++){
+            arr_possible[1][k] = duplicat(arrchecked, POSSIBLE_CONST_BRAT[m][1][k]);
+            if (arr_possible[1][k].length == 0 || arr_possible[1][k] == 0){
+              arr_possible[1][k] = initial[1][k].slice();
+            }
+          }
+        break;
+      }
+    break;
+    case 3:
+      var r = 1, p = 1;
+      switch (parseInt(m)) {
+        case 0: r = 0; p = 0; break;
+        case 1: r = 1; p = 1; break;
+        case 2: r = 0; p = 1; break;
+      }
+      for (var j = r; j <= p; j++){
+        for (var k = 0; k <= 9; k++){
+          arr_possible[j][k] = duplicat(arrchecked, POSSIBLE_CONST_DRUG[m][j][k]);
+          if (arr_possible[j][k].length == 0){
+            arr_possible[j][k] = initial[j][k].slice();
+          }
+        }
+      }
+    break;
+    case 4:
+      // var r = 1, p = 1;
+      switch (parseInt(m)) {
+        case 0:
+          for (var k = 0; k <= 4; k++){
+            arr_possible[0][k] = POSSIBLE_CONST_COMBO[0][0][k].slice();
+          }
+          for (var k = 5; k <= 9; k++){
+            arr_possible[0][k] = duplicat(arrchecked, POSSIBLE_CONST_COMBO[0][0][k]);
+            if (arr_possible[0][k].length == 0){
+              arr_possible[0][k] =  duplicat([6,7,8,9], POSSIBLE_CONST_DRUG[2][0][k]);
+            }
+            if (arr_possible[0][k].length == 0){
+              arr_possible[0][k] =  initial[0][k].slice();
+            }
+          }
+        break;
+        case 1:
+          for (var k = 6; k <= 9; k++){
+            arr_possible[1][k] = POSSIBLE_CONST_COMBO[1][1][k].slice();
+          }
+          for (var k = 0; k <= 5; k++){
+            arr_possible[1][k] = duplicat(arrchecked, POSSIBLE_CONST_COMBO[1][1][k]);
+            if (arr_possible[1][k].length == 0 /*|| arr_possible[j][k] == 0*/){
+              arr_possible[1][k] =  duplicat([6,7,8,9],POSSIBLE_CONST_DRUG[2][1][k]);
+            }
+            if (arr_possible[1][k].length == 0){
+              arr_possible[1][k] =  initial[1][k].slice();
+            }
+          }
+        break;
+        case 2:
+          for (var k = 0; k <= 4; k++){
+            arr_possible[0][k] = POSSIBLE_CONST_COMBO[0][0][k].slice();
+          }
+          for (var k = 5; k <= 9; k++){
+            arr_possible[0][k] = duplicat(arrchecked, POSSIBLE_CONST_COMBO[0][0][k]);
+            if (arr_possible[0][k].length == 0){
+              arr_possible[0][k] =  duplicat([6,7,8,9], POSSIBLE_CONST_DRUG[2][0][k]);
+            }
+            if (arr_possible[0][k].length == 0){
+              arr_possible[0][k] =  initial[0][k].slice();
+            }
+          }
+          for (var k = 6; k <= 9; k++){
+            arr_possible[1][k] = POSSIBLE_CONST_COMBO[1][1][k].slice();
+          }
+          for (var k = 0; k <= 5; k++){
+            arr_possible[1][k] = duplicat(arrchecked, POSSIBLE_CONST_COMBO[1][1][k]);
+            if (arr_possible[1][k].length == 0 /*|| arr_possible[j][k] == 0*/){
+              arr_possible[1][k] =  duplicat([6,7,8,9],POSSIBLE_CONST_DRUG[2][1][k]);
+            }
+            if (arr_possible[1][k].length == 0){
+              arr_possible[1][k] =  initial[1][k].slice();
+            }
+          }
+
+
+        break;
+      }
+    break;
+
+    case 5:
+      for (var i = 0; i <= 9; i++) {
+        for (var j = 0; j<=1; j++){
+          arr_possible[j][i] = [1,2,3,4,5,6,7,8,9];
+        }
+      }
+    break;
+  }
+  return arr_possible;
+}
+
+function TimerStop() {
+  for (var i=0; i<= screen_num; i++){
+    clearInterval(Screen[i].timer);
+  }
+
+}
+colors2 = ["#ff9999", "#dbefff", "#ffdb99", "#d199ff", "#ffff99","#19ff19","#9999ff"]
+colors = ["red","purple","orange","DarkBlue","#ffd919","green","blue"]
+var color_num = 0, primer1=[];
+
+
+function clear_screens(screen_num) {
+  for (var i = 1; i<=screen_num; i++){
+        taskbox_id ="#wt" + i.toString() + "taskbox";
+        $(taskbox_id).val("")
+  }
+}
+var  mus = false;
+chered = true;
+function sound_number_f(n){
+  n = parseInt(n)
+
+    if (n>0){
+      sound_number = "gplus_" + n + ".mp3"
+    }
+    else{
+      n = (-n)
+      sound_number = "gminus_" + n + ".mp3"
+    }
+
+
+  if (chered == true) {
+    audio.src = ' ../assets/audios/numbers/' + sound_number;
+    audio.play();
+  }
+  else{
+    audio2.src = ' ../assets/audios/numbers/' + sound_number;
+    audio2.play();
+  }
+  chered = !chered;
+}
+
+
+
+function change_window(variant, num_screen){
+    switch(variant){
+      case 0:
+        box_type = Screen[num_screen].box_type
+        switch (box_type){
+          case "taskbox":
+            change_window("settingbox", num_screen)
+          break;
+          case "answerbox":
+            change_window("settingbox", num_screen)
+          break;
+          case "settingbox":
+            if (Screen[num_screen].status == "countdown_stopped"){
+              change_window("answerbox", num_screen)
+            }
+            else{
+              change_window("taskbox", num_screen)
+            }
+          break;
+        }
+      break;
+      case "taskbox":
+          Screen[num_screen].box_type = 'taskbox'
+          $("#wt" + num_screen + "answerbox").addClass("hidden")
+          $("#wt" + num_screen + "answerbox_btn").addClass("invisible")
+          $("#wt" + num_screen + "taskbox").removeClass("hidden")
+          $("#wt" + num_screen + "taskbox").removeClass("hidden")
+          $("#window_settings_" + num_screen).addClass("hidden")
+
+          $("#wt" + num_screen + "answerbox_btn_settings").addClass("hidden")
+          $("#wt" + num_screen + "answerbox_btn_repeat").removeClass("hidden")
+          $("#wt" + num_screen + "answerbox_btn_show_example").addClass("hidden")
+      break;
+      case "answerbox":
+          Screen[num_screen].box_type = 'answerbox'
+          $("#wt" + num_screen + "answerbox").removeClass("hidden")
+          $("#wt" + num_screen + "answerbox_btn").removeClass("invisible")
+          $("#wt" + num_screen + "taskbox").addClass("hidden")
+          $("#window_settings_" + num_screen).addClass("hidden")
+
+          $("#wt" + num_screen + "answerbox_btn_settings").removeClass("hidden")
+          $("#wt" + num_screen + "answerbox_btn_repeat").removeClass("hidden")
+          $("#wt" + num_screen + "answerbox_btn_show_example").removeClass("hidden")
+      break;
+      case "settingbox":
+          Screen[num_screen].box_type = 'settingbox'
+          $("#wt" + num_screen + "answerbox").addClass("hidden")
+          $("#wt" + num_screen + "answerbox_btn").removeClass("invisible")
+          $("#wt" + num_screen + "taskbox").addClass("hidden")
+          $("#wt" + num_screen + "taskbox").addClass("hidden")
+          $("#window_settings_" + num_screen).removeClass("hidden")
+      break;
+    }
+}
+
+function change_name(num_screen) {
+  name = Screen[num_screen].name
+  new_name = prompt(' Введите имя  ');
+  if (new_name != '')
+    name = new_name
+  Screen[num_screen].name = name
+  $("#wt" + num_screen + "heading").html(name)
+}
+
+function change_windows(variant, screen_num){
+  if (variant == "main_window"){
+    $("#window_task_0").removeClass("hidden")
+    for (var i=1; i <= screen_num; i++){
+      com ="#window_task_" + i.toString();
+      $(com).addClass("hidden")
+    }
+  }
+  else{
+    $("#window_task_0").addClass("hidden")
+    for (var i=1; i <= screen_num; i++){
+      com ="#window_task_" + i.toString();
+      $(com).removeClass("hidden")
+    }
+    for (var i=1; i<=screen_num; i++){
+      change_window(variant, i)
+    }
+  }
+}
+
+
+function yes_no(a,arr){
+  var c = false, i = 0;
+  while (c == false && i<arr.length) {
+    if (a == arr[i++]) c = true;
+  }
+  return c;
+}
+var stop_cycle = false;
+function ravno(){
+  stop_cycle = true;
+
+  // status = 'answer_enter'
+}
+function chislo_plus_f(){
+  chislo += chislo_plus_all;
+  primer.push(chislo_plus_all)
+  chislo = parseInt(chislo);
+  chislo_plus_all = parseInt(chislo_plus_all);
+}
+
+function chislo_minus_f(){
+  chislo -= chislo_plus_all;
+  ch = "-" + chislo_plus_all.toString()
+  primer.push(ch)
+  chislo = parseInt(chislo);
+  chislo_plus_all = parseInt(chislo_plus_all);
+}
+
+function calculate_simple_add(summands_num, digits_num, half, possible_digits) {
+  var max_chislo = 0;
+  if (yes_no(5,checked_digits)) {
+    for (var i = 0; i < digits_num; i++){
+      max_chislo += 9*power10(i);
+    }
+  }
+  else{
+    for (var i = 0; i < digits_num; i++){
+      max_chislo += 4*power10(i);
+    }
+  }
+  var POSSIBLE_CHECKED_CONST =  possible_digits.slice()
+
+  chislo_plus = []; chislo_plus_all = 0;
+  schotchik++;
+
+  if (chislo == max_chislo || schotchik == summands_num) {
+    ravno();
+  }
+  else {
+    do {
+      chislo_plus_all = 0;
+      chislo_plus = [];
+      for (var i = 0; i < digits_num; i++) {
+        var p = possible_checked_var[i][znak][cifr[i]].slice();
+        if (p.length == 0 || p[0] == 0) {
+          possible_checked_var[i][znak][cifr[i]] = POSSIBLE_CHECKED_CONST[znak][cifr[i]].slice();
+          p = possible_checked_var[i][znak][cifr[i]].slice();
+        }
+        chislo_plus[i] = p[randomInteger(p.length)];
+        chislo_plus_all += chislo_plus[i]*power10(i);
+      }
+    } while (chislo_plus_all == 0);
+
+    for (var i = 0; i < digits_num; i++) {
+      cifr[i] += parseInt(chislo_plus[i]);
+      for (var k = 0; k <= 9; k++){
+        exclude(chislo_plus[i],possible_checked_var[i][0][k]);
+        exclude(chislo_plus[i],possible_checked_var[i][1][k]);
+      }
+    }
+    chislo_plus_f();
+  }
+}
+
+
+function calculate_simple_sub(summands_num, digits_num, half, possible_digits) {
+  var POSSIBLE_CHECKED_CONST =  possible_digits.slice()
+
+  chislo_plus = []; chislo_plus_all = 0;
+  schotchik++;
+
+  if (chislo == 0 || schotchik == summands_num) {
+    ravno();
+  }
+  else {
+    do {
+      chislo_plus_all = 0;
+      chislo_plus = [];
+      for (var i = 0; i < digits_num; i++) {
+        var p = possible_checked_var[i][1][cifr[i]];
+        if (p.length == 0 || p[0] == 0) {
+          possible_checked_var[i][1][cifr[i]] = POSSIBLE_CHECKED_CONST[1][cifr[i]].slice();
+          p = possible_checked_var[i][1][cifr[i]];
+        }
+        chislo_plus[i] = p[randomInteger(p.length)];
+        chislo_plus_all += chislo_plus[i]*power10(i);
+      }
+    } while (chislo_plus_all == 0);
+
+    for (var i = 0; i < digits_num; i++) {
+      cifr[i] -= parseInt(chislo_plus[i]);
+      for (var k = 0; k <= 9; k++){
+        exclude(chislo_plus[i],possible_checked_var[i][0][k]);
+        exclude(chislo_plus[i],possible_checked_var[i][1][k]);
+      }
+    }
+    chislo_minus_f();
+  }
+}
+function calculate_simple_add_sub(summands_num, digits_num, half, possible_digits) {
+  chislo = parseInt(chislo);
+  var max_chislo_4 = 0, l = checked_digits.length-1;
+  if (l == 4){
+    for (var i = 0; i < digits_num; i++){
+      max_chislo_4 += 4*power10(i);
+    }
+  }
+  var max_chislo = power10(digits_num) - 1;
+  var POSSIBLE_CHECKED_CONST =  possible_digits.slice()
+  chislo_plus = []; chislo_plus_all = 0;
+  schotchik++;
+  if (schotchik == summands_num) {
+    ravno();
+  }
+  else {
+    var vspom_chislo = 0;
+    for (var i = 0; i < digits_num; i++){
+      vspom_chislo += 5*power10(i);
+    }
+
+    switch (chislo){
+      case 0: znak = 0; break;
+      case vspom_chislo: znak = 0; break;
+      case max_chislo: znak = 1; break;
+      case max_chislo_4:
+        if ( l == 4 ) znak = 1; else znak = randomInteger(2); break;
+      default: znak = randomInteger(2); break;
+    }
+    var razmer = parseInt((chislo.toString()).length);
+    var per = 0;
+    if (half == true && razmer > 1 && digits_num > 1 && schotchik % 2 == 1){
+      per = 1;
+      var uio = chislo%power10(digits_num-1);
+      switch (chislo%power10(digits_num-1)){
+        case 0: znak = 0; break;
+        case parseInt(vspom_chislo/10): znak = 0; break;
+        case parseInt(max_chislo/10): znak = 1; break;
+        case parseInt(max_chislo_4/10):
+          if ( l == 4 ) znak = 1; else znak = randomInteger(2); break;
+        default: znak = randomInteger(2); break;
+      }
+    }
+    else per = 0;
+    do {
+      chislo_plus_all = 0;
+      chislo_plus = [];
+
+      for (var i = 0; i < digits_num - per; i++) {
+        var p = possible_checked_var[i][znak][cifr[i]].slice();
+        if (p.length == 0 || p[0] == 0) {
+          possible_checked_var[i][znak][cifr[i]] = POSSIBLE_CHECKED_CONST[znak][cifr[i]].slice();
+          p = possible_checked_var[i][znak][cifr[i]].slice();
+        }
+        chislo_plus[i] = p[randomInteger(p.length)];
+        chislo_plus_all += chislo_plus[i]*power10(i);
+      }
+    } while (chislo_plus_all == 0);
+    for (var i = 0; i < digits_num-per; i++) {
+      if (znak == 0)  cifr[i] += parseInt(chislo_plus[i]);
+      else cifr[i] -= parseInt(chislo_plus[i]);
+      for (var k = 0; k <= 9; k++){
+        exclude(chislo_plus[i],possible_checked_var[i][0][k]);
+        exclude(chislo_plus[i],possible_checked_var[i][1][k]);
+      }
+    }
+
+    if (znak == 0) {
+      chislo_plus_f();
+    }
+    else {
+      chislo_minus_f();
+    }
+  }
+}
+
+function calculate_brother_add(summands_num, digits_num, half, possible_digits) {
+  var max_chislo = power10(digits_num)-1;
+  var POSSIBLE_CHECKED_CONST =  possible_digits.slice()
+
+  chislo_plus = []; chislo_plus_all = 0;
+  schotchik++;
+
+  if (schotchik == summands_num) {
+    ravno();
+  }
+  else {
+    var vspom_chislo1 = 0, vspom_chislo2 = 0;
+    for (var i = 0; i < digits_num; i++){
+      vspom_chislo1 += 5*power10(i);
+      vspom_chislo2 += 7*power10(i);
+    }
+    if (chislo >= vspom_chislo2) znak = 1;
+    else if (chislo < vspom_chislo1) znak = 0;
+    else znak = randomInteger(2);
+    var razmer = parseInt((chislo.toString()).length);
+    var per = 0;
+    if (half == true && razmer > 1 && digits_num > 1 && schotchik % 2 == 1){
+      per = 1;
+      switch (chislo%power10(digits_num-1)){
+        case 0: znak = 0; break;
+        case parseInt(max_chislo/10): znak = 1; break;
+        default: znak = randomInteger(2); break;
+      }
+    }
+    else per = 0;
+    do {
+      chislo_plus_all = 0;
+      chislo_plus = [];
+      for (var i = 0; i < digits_num-per; i++) {
+        var p = possible_checked_var[i][znak][cifr[i]].slice();
+        if (p.length == 0 || p[0] == 0) {
+          possible_checked_var[i][znak][cifr[i]] = POSSIBLE_CHECKED_CONST[znak][cifr[i]].slice();
+          p = possible_checked_var[i][znak][cifr[i]].slice();
+        }
+        chislo_plus[i] = p[randomInteger(p.length)];
+        chislo_plus_all += chislo_plus[i]*power10(i);
+      }
+    } while (chislo_plus_all == 0);
+
+    for (var i = 0; i < digits_num-per; i++) {
+      if (znak == 0)  cifr[i] += parseInt(chislo_plus[i]);
+      else cifr[i] -= parseInt(chislo_plus[i]);
+      for (var k = 0; k <= 9; k++){
+        exclude(chislo_plus[i],possible_checked_var[i][0][k]);
+        exclude(chislo_plus[i],possible_checked_var[i][1][k]);
+      }
+    }
+
+    if (znak == 0) {
+      chislo_plus_f();
+    }
+    else {
+      chislo_minus_f();
+    }
+  }
+}
+
+function calculate_brother_sub(summands_num, digits_num, half, possible_digits) {
+  var max_chislo = power10(digits_num)-1;
+  var POSSIBLE_CHECKED_CONST =  possible_digits.slice()
+
+  chislo_plus = []; chislo_plus_all = 0;
+  schotchik++;
+
+  if (schotchik == summands_num) {
+    ravno();
+  }
+  else {
+    var vspom_chislo1 = 0;
+    for (var i = 0; i < digits_num; i++){
+      vspom_chislo1 += 5*power10(i);
+    }
+    if (chislo < vspom_chislo1) znak = 0;
+    else znak = 1;
+    var razmer = parseInt((chislo.toString()).length);
+    var per = 0;
+    if (half == true && razmer > 1 && digits_num > 1 &&  schotchik % 2 == 1){
+      per = 1;
+      switch (chislo%power10(digits_num-1)){
+        case 0: znak = 0; break;
+        case parseInt(max_chislo/10): znak = 1; break;
+        default: znak = randomInteger(2); break;
+      }
+    }
+    else per = 0;
+    do {
+      chislo_plus_all = 0;
+      chislo_plus = [];
+      for (var i = 0; i < digits_num-per; i++) {
+        var p = possible_checked_var[i][znak][cifr[i]].slice();
+        if (p.length == 0 || p[0] == 0) {
+          possible_checked_var[i][znak][cifr[i]] = POSSIBLE_CHECKED_CONST[znak][cifr[i]].slice();
+          p = possible_checked_var[i][znak][cifr[i]].slice();
+        }
+        chislo_plus[i] = p[randomInteger(p.length)];
+        chislo_plus_all += chislo_plus[i]*power10(i);
+      }
+    } while (chislo_plus_all == 0);
+
+    for (var i = 0; i < digits_num-per; i++) {
+      if (cifr[i]>=5 && cifr[i] <= 8) {
+        for (var k = 5; k <= 9; k++){
+          exclude(chislo_plus[i],possible_checked_var[i][0][k]);
+          exclude(chislo_plus[i],possible_checked_var[i][1][k]);
+        }
+      }
+      else {
+        for (var k = 0; k <= 4; k++){
+          exclude(chislo_plus[i],possible_checked_var[i][0][k]);
+          exclude(chislo_plus[i],possible_checked_var[i][1][k]);
+        }
+      }
+      if (znak == 0)  cifr[i] += parseInt(chislo_plus[i]);
+      else cifr[i] -= parseInt(chislo_plus[i]);
+    }
+
+    if (znak == 0) chislo_plus_f();
+    else chislo_minus_f();
+  }
+}
+
+function calculate_brother_add_sub(summands_num, digits_num, half, possible_digits) {
+  var max_chislo = power10(digits_num)-1;
+  var POSSIBLE_CHECKED_CONST =  possible_digits.slice()
+
+  chislo_plus = []; chislo_plus_all = 0;
+  schotchik++;
+
+  if (schotchik == summands_num) {
+    ravno();
+  }
+  else {
+    var vspom_chislo1 = 0, vspom_chislo2 = 0;
+    for (var i = 0; i < digits_num; i++){
+      vspom_chislo1 += 5*power10(i);
+      vspom_chislo2 += 7*power10(i);
+    }
+    if (chislo >= vspom_chislo2) znak = 1;
+    else if (chislo < vspom_chislo1) znak = 0;
+    else znak = randomInteger(2);
+    var razmer = parseInt((chislo.toString()).length);
+    var per = 0;
+    if (half == true && razmer > 1 && digits_num > 1 && schotchik % 2 == 1){
+      per = 1;
+      switch (chislo%power10(digits_num-1)){
+        case 0: znak = 0; break;
+        case parseInt(max_chislo/10): znak = 1; break;
+        default: znak = randomInteger(2); break;
+      }
+    }
+    else per = 0;
+    do {
+      chislo_plus_all = 0;
+      chislo_plus = [];
+      for (var i = 0; i < digits_num-per; i++) {
+        var p = possible_checked_var[i][znak][cifr[i]].slice();
+          if (p.length == 0 || p[0] == 0) {
+            possible_checked_var[i][znak][cifr[i]] = POSSIBLE_CHECKED_CONST[znak][cifr[i]].slice();
+            p = possible_checked_var[i][znak][cifr[i]].slice();
+          }
+          chislo_plus[i] = p[randomInteger(p.length)];
+          chislo_plus_all += chislo_plus[i]*power10(i);
+      }
+    } while (chislo_plus_all == 0);
+
+    for (var i = 0; i < digits_num-per; i++) {
+      if (znak == 0)  cifr[i] += parseInt(chislo_plus[i]);
+      else cifr[i] -= parseInt(chislo_plus[i]);
+      for (var k = 0; k <= 9; k++){
+        exclude(chislo_plus[i],possible_checked_var[i][0][k]);
+        exclude(chislo_plus[i],possible_checked_var[i][1][k]);
+      }
+    }
+
+    if (znak == 0) chislo_plus_f();
+    else chislo_minus_f();
+  }
+}
+
+function calculate_friend_add(summands_num, digits_num, half, possible_digits) {
+  var POSSIBLE_CHECKED_CONST =  possible_digits.slice()
+  chislo_plus = []; chislo_plus_all = 0;
+  schotchik++;
+  if (schotchik == summands_num) {
+    ravno();
+  }
+  else {
+    var razmer = parseInt((chislo.toString()).length);
+    var per = 0;
+    if (half == true && razmer > 1 && digits_num > 1 && schotchik % 2 == 1){
+      per = 1;
+    }
+    else per = 0;
+    do {
+      chislo_plus_all = 0;
+      chislo_plus = [];
+      for (var i = 0; i < digits_num-per; i++) {
+        var p = possible_checked_var[i][znak][cifr[i]].slice();
+        if (p.length == 0 || p[0] == 0) {
+          possible_checked_var[i][znak][cifr[i]] = POSSIBLE_CHECKED_CONST[znak][cifr[i]].slice();
+          p = possible_checked_var[i][znak][cifr[i]].slice();
+        }
+        chislo_plus[i] = p[randomInteger(p.length)];
+        chislo_plus_all += chislo_plus[i]*power10(i);
+      }
+    } while (chislo_plus_all == 0);
+
+    for (var i = 0; i < digits_num-per; i++) {
+      for (var k = 0; k <= 9; k++){
+
+          exclude(chislo_plus[i],possible_checked_var[i][0][k]);
+          exclude(chislo_plus[i],possible_checked_var[i][1][k]);
+
+      }
+    }
+    chislo_plus_f();
+    cifr.length = 0;
+    for (var i = 0; i < digits_num; i++) {
+      cifr[i] = parseInt((chislo % power10(i + 1))/power10(i));
+    }
+
+  }
+}
+
+function calculate_friend_sub(summands_num, digits_num, half, possible_digits) {
+  var POSSIBLE_CHECKED_CONST =  possible_digits.slice()
+
+
+  chislo_plus = []; chislo_plus_all = 0;
+  schotchik++;
+  var razmer = 0;
+  razmer = parseInt((chislo.toString()).length);
+
+  if (razmer == 1 || schotchik == summands_num) {
+    ravno();
+  }
+  else {
+    var per = 0;
+    if (half == true && razmer > 2  && digits_num > 1 && schotchik % 2 == 1){
+      per = 1;
+    }
+    else per = 0;
+    do {
+      chislo_plus_all = 0;
+      chislo_plus = undefined;
+      chislo_plus = [];
+      for (var i = 0; i < razmer - 1 - per; i++) {
+        var p = possible_checked_var[i][1][cifr[i]];
+        if (p.length == 0 || p[0] == 0) {
+          possible_checked_var[i][1][cifr[i]] = POSSIBLE_CHECKED_CONST[1][cifr[i]].slice();
+          p = possible_checked_var[i][1][cifr[i]];
+        }
+        chislo_plus[i] = p[randomInteger(p.length)];
+        chislo_plus_all += chislo_plus[i]*power10(i);
+      }
+    } while (chislo_plus_all == 0);
+
+    for (var i = 0; i < razmer - 1 - per; i++) {
+      for (var k = 0; k <= 9; k++){
+
+          exclude(chislo_plus[i],possible_checked_var[i][1][k]);
+
+      }
+    }
+
+    chislo_minus_f();
+    razmer = parseInt((chislo.toString()).length);
+    cifr.length = 0;
+    for (var i = 0; i < razmer; i++) {
+        cifr[i] = parseInt((chislo % power10(i + 1))/power10(i));
+      }
+    cifr.length = razmer - 1;
+
+
+  }
+}
+
+function calculate_friend_add_sub(summands_num, digits_num, half, possible_digits) {
+  var POSSIBLE_CHECKED_CONST =  possible_digits.slice()
+
+  chislo_plus = []; chislo_plus_all = 0;
+  schotchik++;
+
+  var razmer = 0;
+  razmer = parseInt((chislo.toString()).length);
+  if (schotchik == summands_num) {
+    ravno();
+  }
+  else {
+    if (razmer <= digits_num) znak = 0;
+    else znak =  randomInteger(2);
+    var per = 0;
+    if (half == true && razmer > 1 && digits_num > 1 && schotchik % 2 == 1){
+      per = 1;
+    }
+    else per = 0;
+    do {
+      chislo_plus_all = 0;
+      chislo_plus = [];
+      if (znak == 0){
+        for (var i = 0; i < digits_num - per; i++) {
+          var p = possible_checked_var[i][znak][cifr[i]].slice();
+          if (p.length == 0 || p[0] == 0) {
+            possible_checked_var[i][znak][cifr[i]] = POSSIBLE_CHECKED_CONST[znak][cifr[i]].slice();
+            p = possible_checked_var[i][znak][cifr[i]].slice();
+          }
+          chislo_plus[i] = p[randomInteger(p.length)];
+          chislo_plus_all += chislo_plus[i]*power10(i);
+        }
+      }
+      else{
+        if (razmer > digits_num){
+          for (var i = 0; i < digits_num - per; i++) {
+            var p = possible_checked_var[i][znak][cifr[i]].slice();
+            if (p.length == 0 || p[0] == 0) {
+              possible_checked_var[i][znak][cifr[i]] = POSSIBLE_CHECKED_CONST[znak][cifr[i]].slice();
+              p = possible_checked_var[i][znak][cifr[i]].slice();
+            }
+            chislo_plus[i] = p[randomInteger(p.length)];
+            chislo_plus_all += chislo_plus[i]*power10(i);
+          }
+        }
+        else{
+          for (var i = 0; i < razmer - 1; i++) {
+            var p = possible_checked_var[i][znak][cifr[i]].slice();
+            if (p.length == 0 || p[0] == 0) {
+              possible_checked_var[i][znak][cifr[i]] = POSSIBLE_CHECKED_CONST[znak][cifr[i]].slice();
+              p = possible_checked_var[i][znak][cifr[i]].slice();
+            }
+            chislo_plus[i] = p[randomInteger(p.length)];
+            chislo_plus_all += chislo_plus[i]*power10(i);
+          }
+        }
+      }
+    } while (chislo_plus_all == 0);
+
+    for (var i = 0; i < digits_num - per; i++) {
+
+        for (var k = 0; k <= 9; k++){
+          exclude(chislo_plus[i],possible_checked_var[i][0][k]);
+          exclude(chislo_plus[i],possible_checked_var[i][1][k]);
+        }
+
+    }
+    if (znak == 0) {
+      chislo_plus_f();
+      cifr.length = 0;
+      for (var i = 0; i < digits_num; i++) {
+        cifr[i] = parseInt((chislo % power10(i + 1))/power10(i));
+      }
+    }
+    else {
+      chislo_minus_f();
+      cifr.length = 0;
+      for (var i = 0; i < digits_num; i++) {
+        cifr[i] = parseInt((chislo % power10(i + 1))/power10(i));
+      }
+    }
+  }
+}
+
+function calculate_combo_add(summands_num, digits_num, half, possible_digits) {
+  var POSSIBLE_CHECKED_CONST =  possible_digits.slice()
+
+  chislo_plus = []; chislo_plus_all = 0;
+  schotchik++;
+
+  if (schotchik == summands_num) {
+    ravno();
+  }
+  else {
+    var razmer = parseInt((chislo.toString()).length);
+    var per = 0;
+    if (half == true && razmer > 1 && digits_num > 1 && schotchik % 2 == 1){
+      per = 1;
+    }
+    else per = 0;
+    do {
+      chislo_plus_all = 0;
+      chislo_plus = [];
+      for (var i = 0; i < digits_num-per; i++) {
+        var p = possible_checked_var[i][znak][cifr[i]].slice();
+          if (p.length == 0 || p[0] == 0) {
+            possible_checked_var[i][znak][cifr[i]] = POSSIBLE_CHECKED_CONST[znak][cifr[i]].slice();
+            p = possible_checked_var[i][znak][cifr[i]].slice();
+          }
+          chislo_plus[i] = p[randomInteger(p.length)];
+          chislo_plus_all += chislo_plus[i]*power10(i);
+      }
+    } while (chislo_plus_all == 0);
+    for (var i = 0; i < digits_num-per; i++) {
+      for (var k = 0; k <= 9; k++){
+        exclude(chislo_plus[i],possible_checked_var[i][0][k]);
+        exclude(chislo_plus[i],possible_checked_var[i][1][k]);
+      }
+    }
+      chislo_plus_f();
+      cifr.length = 0;
+      for (var i = 0; i < digits_num; i++) {
+        cifr[i] = parseInt((chislo % power10(i + 1))/power10(i));
+      }
+
+  }
+}
+
+function calculate_combo_sub(summands_num, digits_num, half, possible_digits) {
+  var POSSIBLE_CHECKED_CONST =  possible_checked(module, operation, checked_digits).slice();
+
+
+  chislo_plus = []; chislo_plus_all = 0;
+  schotchik++;
+  var razmer = 0;
+  razmer = parseInt((chislo.toString()).length);
+
+  if (razmer == 1 || schotchik == summands_num) {
+    ravno();
+  }
+  else {
+    var per = 0;
+    if (half == true && razmer > 2 && digits_num > 1 && schotchik % 2 == 1){
+      per = 1;
+    }
+    else per = 0;
+    do {
+      chislo_plus_all = 0;
+      chislo_plus = undefined;
+      chislo_plus = [];
+
+
+      for (var i = 0; i < razmer - 1 - per; i++) {
+        var p = possible_checked_var[i][1][cifr[i]];
+          if (p.length == 0 || p[0] == 0) {
+            possible_checked_var[i][1][cifr[i]] = POSSIBLE_CHECKED_CONST[1][cifr[i]].slice();
+            p = possible_checked_var[i][1][cifr[i]];
+          }
+          chislo_plus[i] = p[randomInteger(p.length)];
+          chislo_plus_all += chislo_plus[i]*power10(i);
+      }
+    } while (chislo_plus_all == 0);
+
+    for (var i = 0; i < razmer - 1 - per; i++) {
+      for (var k = 0; k <= 4; k++){
+        exclude(chislo_plus[i],possible_checked_var[i][1][k]);
+      }
+    }
+
+    chislo_minus_f();
+    razmer = parseInt((chislo.toString()).length);
+    cifr.length = 0;
+    for (var i = 0; i < razmer; i++) {
+        cifr[i] = parseInt((chislo % power10(i + 1))/power10(i));
+      }
+    cifr.length = razmer - 1;
+  }
+}
+
+function calculate_combo_add_sub(summands_num, digits_num, half, possible_digits) {
+  var POSSIBLE_CHECKED_CONST =  possible_digits.slice()
+
+  chislo_plus = []; chislo_plus_all = 0;
+  schotchik++;
+
+  var razmer = 0;
+  razmer = parseInt((chislo.toString()).length);
+  if (schotchik == summands_num) {
+    ravno();
+  }
+  else {
+    if (razmer <= digits_num) znak = 0;
+    else znak =  randomInteger(2);
+    var per = 0;
+    if (half == true && razmer > 1 && digits_num > 1 && schotchik % 2 == 1){
+      per = 1;
+    }
+    else per = 0;
+    do {
+      chislo_plus_all = 0;
+      chislo_plus = [];
+      if (znak == 0){
+        for (var i = 0; i < digits_num - per; i++) {
+          var p = possible_checked_var[i][znak][cifr[i]].slice();
+            if (p.length == 0 || p[0] == 0) {
+              possible_checked_var[i][znak][cifr[i]] = POSSIBLE_CHECKED_CONST[znak][cifr[i]].slice();
+              p = possible_checked_var[i][znak][cifr[i]].slice();
+            }
+            chislo_plus[i] = p[randomInteger(p.length)];
+            chislo_plus_all += chislo_plus[i]*power10(i);
+        }
+      }
+      else{
+        if (razmer > digits_num){
+          for (var i = 0; i < digits_num - per; i++) {
+            var p = possible_checked_var[i][znak][cifr[i]].slice();
+              if (p.length == 0 || p[0] == 0) {
+                possible_checked_var[i][znak][cifr[i]] = POSSIBLE_CHECKED_CONST[znak][cifr[i]].slice();
+                p = possible_checked_var[i][znak][cifr[i]].slice();
+              }
+              chislo_plus[i] = p[randomInteger(p.length)];
+              chislo_plus_all += chislo_plus[i]*power10(i);
+          }
+        }
+        else{
+          for (var i = 0; i < razmer - 1; i++) {
+            var p = possible_checked_var[i][znak][cifr[i]].slice();
+              if (p.length == 0 || p[0] == 0) {
+                possible_checked_var[i][znak][cifr[i]] = POSSIBLE_CHECKED_CONST[znak][cifr[i]].slice();
+                p = possible_checked_var[i][znak][cifr[i]].slice();
+              }
+              chislo_plus[i] = p[randomInteger(p.length)];
+              chislo_plus_all += chislo_plus[i]*power10(i);
+          }
+        }
+      }
+    } while (chislo_plus_all == 0);
+
+    for (var i = 0; i < digits_num - per; i++) {
+      for (var k = 0; k <= 9; k++){
+        exclude(chislo_plus[i],possible_checked_var[i][0][k]);
+        exclude(chislo_plus[i],possible_checked_var[i][1][k]);
+      }
+    }
+    if (znak == 0) {
+      chislo_plus_f();
+      cifr.length = 0;
+      for (var i = 0; i < digits_num; i++) {
+        cifr[i] = parseInt((chislo % power10(i + 1))/power10(i));
+      }
+    }
+    else {
+      chislo_minus_f();
+      cifr.length = 0;
+      for (var i = 0; i < digits_num; i++) {
+        cifr[i] = parseInt((chislo % power10(i + 1))/power10(i));
+      }
+    }
+  }
+}
+
+function calculate_random_add(summands_num, digits_num, half, possible_digits) {
+  var POSSIBLE_CHECKED_CONST =  possible_digits.slice()
+
+  chislo_plus = []; chislo_plus_all = 0;
+  schotchik++;
+
+  if (schotchik == summands_num) {
+    ravno();
+  }
+  else {
+    var razmer = parseInt((chislo.toString()).length);
+    var per = 0;
+    if (half == true && razmer > 1 && digits_num > 1 && schotchik % 2 == 1){
+      per = 1;
+    }
+    else per = 0;
+    do {
+      chislo_plus_all = 0;
+      chislo_plus = [];
+      for (var i = 0; i < digits_num - per; i++) {
+        var p = possible_checked_var[i][znak][cifr[i]].slice();
+          if (p.length == 0 || p[0] == 0) {
+            possible_checked_var[i][znak][cifr[i]] = POSSIBLE_CHECKED_CONST[znak][cifr[i]].slice();
+            p = possible_checked_var[i][znak][cifr[i]].slice();
+          }
+          chislo_plus[i] = p[randomInteger(p.length)];
+          chislo_plus_all += chislo_plus[i]*power10(i);
+      }
+    } while (chislo_plus_all == 0);
+
+    for (var i = 0; i < digits_num - per; i++) {
+      for (var k = 0; k <= 9; k++){
+        exclude(chislo_plus[i],possible_checked_var[i][0][k]);
+        exclude(chislo_plus[i],possible_checked_var[i][1][k]);
+      }
+    }
+    chislo_plus_f();
+    cifr.length = 0;
+    for (var i = 0; i < digits_num; i++) {
+      cifr[i] = parseInt((chislo % power10(i + 1))/power10(i));
+    }
+  }
+}
+
+function calculate_random_sub(summands_num, digits_num, half, possible_digits) {
+  var POSSIBLE_CHECKED_CONST =  possible_digits.slice()
+  chislo_plus = []; chislo_plus_all = 0;
+  schotchik++;
+  var razmer = 0;
+  razmer = parseInt((chislo.toString()).length);
+
+  if (razmer == 1 || schotchik == summands_num) {
+    ravno();
+  }
+  else {
+    var per = 0;
+    if (half == true && razmer > 2 && digits_num > 1 && schotchik % 2 == 1){
+      per = 1;
+    }
+    else per = 0;
+    do {
+      chislo_plus_all = 0;
+      chislo_plus = undefined;
+      chislo_plus = [];
+
+
+      for (var i = 0; i < razmer - 1 - per; i++) {
+        var p = possible_checked_var[i][1][cifr[i]];
+          if (p.length == 0 || p[0] == 0) {
+            possible_checked_var[i][1][cifr[i]] = POSSIBLE_CHECKED_CONST[1][cifr[i]].slice();
+            p = possible_checked_var[i][1][cifr[i]];
+          }
+          chislo_plus[i] = p[randomInteger(p.length)];
+          chislo_plus_all += chislo_plus[i]*power10(i);
+      }
+    } while (chislo_plus_all == 0);
+
+    for (var i = 0; i < razmer - 1 - per; i++) {
+      for (var k = 0; k <= 9; k++){
+        exclude(chislo_plus[i],possible_checked_var[i][1][k]);
+      }
+    }
+    chislo_minus_f();
+    razmer = parseInt((chislo.toString()).length);
+    cifr.length = 0;
+    for (var i = 0; i < razmer; i++) {
+        cifr[i] = parseInt((chislo % power10(i + 1))/power10(i));
+      }
+    cifr.length = razmer - 1;
+  }
+}
+
+function calculate_random_add_sub(summands_num, digits_num, half, possible_digits) {
+  var POSSIBLE_CHECKED_CONST =  possible_digits.slice()
+  chislo_plus = []; chislo_plus_all = 0;
+  schotchik++;
+  var razmer = 0;
+  razmer = parseInt((chislo.toString()).length);
+  if (schotchik == summands_num) {
+    ravno();
+  }
+  else {
+    if (razmer <= digits_num) znak = 0;
+    else znak =  randomInteger(2);
+    var per = 0;
+    if (half == true && razmer > 1 && digits_num > 1 && schotchik % 2 == 1){
+      per = 1;
+    }
+    else per = 0;
+    do {
+      chislo_plus_all = 0;
+      chislo_plus = [];
+      if (znak == 0){
+        for (var i = 0; i < digits_num - per; i++) {
+          var p = possible_checked_var[i][znak][cifr[i]].slice();
+            if (p.length == 0 || p[0] == 0) {
+              possible_checked_var[i][znak][cifr[i]] = POSSIBLE_CHECKED_CONST[znak][cifr[i]].slice();
+              p = possible_checked_var[i][znak][cifr[i]].slice();
+            }
+            chislo_plus[i] = p[randomInteger(p.length)];
+            chislo_plus_all += chislo_plus[i]*power10(i);
+        }
+      }
+      else{
+        if (razmer > digits_num){
+          for (var i = 0; i < digits_num - per; i++) {
+            var p = possible_checked_var[i][znak][cifr[i]].slice();
+              if (p.length == 0 || p[0] == 0) {
+                possible_checked_var[i][znak][cifr[i]] = POSSIBLE_CHECKED_CONST[znak][cifr[i]].slice();
+                p = possible_checked_var[i][znak][cifr[i]].slice();
+              }
+              chislo_plus[i] = p[randomInteger(p.length)];
+              chislo_plus_all += chislo_plus[i]*power10(i);
+          }
+        }
+        else{
+          for (var i = 0; i < razmer - 1; i++) {
+            var p = possible_checked_var[i][znak][cifr[i]].slice();
+              if (p.length == 0 || p[0] == 0) {
+                possible_checked_var[i][znak][cifr[i]] = POSSIBLE_CHECKED_CONST[znak][cifr[i]].slice();
+                p = possible_checked_var[i][znak][cifr[i]].slice();
+              }
+              chislo_plus[i] = p[randomInteger(p.length)];
+              chislo_plus_all += chislo_plus[i]*power10(i);
+          }
+        }
+      }
+    } while (chislo_plus_all == 0);
+
+    for (var i = 0; i < digits_num - per; i++) {
+      for (var k = 0; k <= 9; k++){
+        exclude(chislo_plus[i],possible_checked_var[i][0][k]);
+        exclude(chislo_plus[i],possible_checked_var[i][1][k]);
+      }
+    }
+
+    if (znak == 0) {
+      chislo_plus_f();
+      cifr.length = 0;
+      for (var i = 0; i < digits_num; i++) {
+        cifr[i] = parseInt((chislo % power10(i + 1))/power10(i));
+      }
+    }
+    else {
+      cifr.length = 0;
+      for (var i = 0; i < digits_num; i++) {
+        cifr[i] = parseInt((chislo % power10(i + 1))/power10(i));
+      }
+      chislo_minus_f();
+    }
+  }
+}
+
+
+</script>
+    <script src=" ../assets/scripts/device.js"></script>
+    <script src=" ../assets/scripts/jquery-1.10.2.min.js"></script>
+    <script src=" ../assets/scripts/bootstrap.min.js"></script>
+
+
+</body>
+
+</html>
